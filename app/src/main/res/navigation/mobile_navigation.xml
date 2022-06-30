@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/homelessListFragment">
+
+    <fragment
+        android:id="@+id/homelessListFragment"
+        android:name="app.htheh.helpthehomeless.ui.homelesslist.HomelessListFragment"
+        android:label="@string/menu_list"
+        tools:layout="@layout/fragment_homeless_list">
+
+        <action
+            android:id="@+id/action_showProfile"
+            app:destination="@+id/homelessProfileFragment" />
+
+        <action
+            android:id="@+id/action_addHomeless"
+            app:destination="@+id/addHomelessFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/homelessProfileFragment"
+        android:name="app.htheh.helpthehomeless.ui.homelessprofile.HomelessProfileFragment"
+        android:label="@string/profile_fragment"
+        tools:layout="@layout/fragment_homeless_profile">
+
+        <argument
+            android:name="selectedHomeless"
+            app:argType="app.htheh.helpthehomeless.model.Homeless"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/addHomelessFragment"
+        android:name="app.htheh.helpthehomeless.ui.addhomeless.AddHomelessFragment"
+        android:label="@string/add_homeless"
+        tools:layout="@layout/fragment_add_homeless">
+    </fragment>
+
+</navigation>

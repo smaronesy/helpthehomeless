@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "106000537848",
+    "project_id": "help-the-homeless-ffe7a",
+    "storage_bucket": "help-the-homeless-ffe7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106000537848:android:0bb4c3a3ecd14444a9030d",
+        "android_client_info": {
+          "package_name": "app.htheh.helpthehomeless"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "106000537848-vj0n0f3bum39m9psgfcfqf0fhg9lgoad.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.htheh.helpthehomeless",
+            "certificate_hash": "0aec452c9378fd63c341a2dc097d7f393f9a806f"
+          }
+        },
+        {
+          "client_id": "106000537848-9tofmpo0lhh532gbkkffemku9qfoe8vm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdBTHDtU1w1pl-nGwV70PsdOnTSL4WGxo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "106000537848-9tofmpo0lhh532gbkkffemku9qfoe8vm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">HelpTheHomeless</string>
+    <string name="menu_stats">Poverty Stats</string>
+    <string name="menu_list">Home</string>
+    <string name="action_settings">Settings</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="welcome_to_help_the_homeless">Welcome to Help the Homeless App</string>
+    <string name="to_login">Press to login</string>
+    <string name="google_maps_key">AIzaSyCdBTHDtU1w1pl-nGwV70PsdOnTSL4WGxo</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="register">REGISTRATION</string>
+    <string name="register_button">REGISTER</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="homeless_firstName">First Name</string>
+    <string name="hl_email">Email address</string>
+    <string name="profile_fragment">Profile</string>
+    <string name="add_homeless">Add hl</string>
+    <string name="all_profiles">All</string>
+    <string name="weeks_profiles">Week</string>
+    <string name="todays_profiles">Today</string>
 </resources>
