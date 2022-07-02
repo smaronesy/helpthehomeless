@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.databinding.FragmentAddHomelessBinding
 import app.htheh.helpthehomeless.utils.Constants
@@ -33,6 +34,10 @@ class AddHomelessFragment : Fragment() {
 
         val today = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault()).format(
             Calendar.getInstance().time)
+
+        binding.ahContinue.setOnClickListener {
+            this.findNavController().navigate(AddHomelessFragmentDirections.actionSelectLocation())
+        }
 
         return binding.root
     }

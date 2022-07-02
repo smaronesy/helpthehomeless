@@ -92,5 +92,17 @@
 
         </LinearLayout>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/ah_continue"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="68dp"
+            android:text="Continue"
+            android:textColor="@color/black"
+            android:backgroundTint="#C4C4C6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_needs_shelter" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
