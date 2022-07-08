@@ -13,19 +13,34 @@ data class HomelessEntity(
     var email: String = "",
 
     @ColumnInfo(name="first_name")
-    var firstName: String = "",
+    var firstName: String?,
 
     @ColumnInfo(name="last_name")
-    var lastName: String = "",
+    var lastName: String?,
 
     @ColumnInfo(name="phone")
-    var phone: String = "",
+    var phone: String?,
 
     @ColumnInfo(name="needs_home")
-    var needsHome: Boolean = false,
+    var needsHome: Boolean?,
+
+    @ColumnInfo(name="location_description")
+    var approximateLocation: String?,
+
+    @ColumnInfo(name="latitude")
+    var latitude: Double?,
+
+    @ColumnInfo(name="longitude")
+    var longitude: Double?,
+
+    @ColumnInfo(name="image_uri")
+    var imageUri: String?,
+
+    @ColumnInfo(name="image_path")
+    var imagePath: String?,
 
     @ColumnInfo(name="date_added")
-    var dateAdded: String = ""
+    var dateAdded: String?
 )
 
 fun List<HomelessEntity>.asDomainModel(): List<Homeless> {
@@ -36,6 +51,11 @@ fun List<HomelessEntity>.asDomainModel(): List<Homeless> {
             lastName = it.lastName,
             phone = it.phone,
             needsHome = it.needsHome,
+            approximateLocation = it.approximateLocation,
+            latitude = it.latitude,
+            longitude = it.longitude,
+            imageUri = it.imageUri,
+            imagePath = it.imagePath,
             dateAdded = it.dateAdded
         )
     }
@@ -49,6 +69,11 @@ fun List<Homeless>.asDatabaseObject(): Array<HomelessEntity> {
             lastName = it.lastName,
             phone = it.phone,
             needsHome = it.needsHome,
+            approximateLocation = it.approximateLocation,
+            latitude = it.latitude,
+            longitude = it.longitude,
+            imageUri = it.imageUri,
+            imagePath = it.imagePath,
             dateAdded = it.dateAdded
         )
     }.toTypedArray()

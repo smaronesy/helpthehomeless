@@ -7,6 +7,8 @@
         <entry key="app/src/main/res/drawable/ic_homeless_add.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_homeless_emergency.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_menu_stats.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_photo_camera_128.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_photo_library_128.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_authentication.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/activity_homeless.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />

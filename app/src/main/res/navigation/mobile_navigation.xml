@@ -54,6 +54,10 @@
             android:id="@+id/action_uploadPhoto"
             app:destination="@+id/uploadPhotoFragment"/>
 
+        <argument
+            android:name="homeless"
+            app:argType="app.htheh.helpthehomeless.model.Homeless"/>
+
     </fragment>
 
     <fragment
@@ -61,6 +65,15 @@
         android:name="app.htheh.helpthehomeless.ui.addhomeless.savephoto.UploadHomelessPhotoFragment"
         android:label="@string/upload_homeless_photo"
         tools:layout="@layout/fragment_upload_homeless_photo">
+
+        <action
+            android:id="@+id/action_toHomelessList"
+            app:destination="@+id/homelessListFragment"/>
+
+        <argument
+            android:name="homeless"
+            app:argType="app.htheh.helpthehomeless.model.Homeless"/>
+
     </fragment>
 
 </navigation>

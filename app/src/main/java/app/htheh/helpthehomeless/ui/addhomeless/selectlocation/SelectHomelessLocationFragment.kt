@@ -20,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import app.htheh.helpthehomeless.BuildConfig
 import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.databinding.FragmentSelectHomelessLocationBinding
+import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.ui.addhomeless.AddHomelessViewModel
 import app.htheh.helpthehomeless.ui.homelesslist.HomelessListFragmentDirections
 import app.htheh.helpthehomeless.utils.setDisplayHomeAsUpEnabled
@@ -40,11 +41,6 @@ import com.udacity.project4.locationreminders.savereminder.requestForegroundLoca
 import kotlinx.android.synthetic.main.fragment_select_homeless_location.*
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 /**
  * A simple [Fragment] subclass.
  * Use the [SelectHomelessLocationFragment.newInstance] factory method to
@@ -54,6 +50,7 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var addHomelessViewModel: AddHomelessViewModel
     private lateinit var binding: FragmentSelectHomelessLocationBinding
+    private lateinit var homeLess: Homeless
 
     private lateinit var lastKnownLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -132,6 +129,10 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
 
         setHasOptionsMenu(true)
         setDisplayHomeAsUpEnabled(true)
+
+        homeLess = SelectHomelessLocationFragmentArgs.fromBundle(arguments!!).homeless
+        homeLess.latitude = addHomelessViewModel.latitude.value
+        homeLess.longitude = addHomelessViewModel.longitude.value
 
         // add the map setup implementation
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
@@ -340,7 +341,7 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
                 } else {
                     addHomelessViewModel.selectedLocationStr.value = "Random Location"
                 }
-                this.findNavController().navigate(SelectHomelessLocationFragmentDirections.actionUploadPhoto())
+                this.findNavController().navigate(SelectHomelessLocationFragmentDirections.actionUploadPhoto(homeLess))
             } else {
                 Toast.makeText(this.requireContext(), "Please select a location", Toast.LENGTH_SHORT).show()
             }

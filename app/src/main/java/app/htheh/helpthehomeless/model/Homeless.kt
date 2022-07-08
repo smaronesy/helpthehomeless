@@ -5,7 +5,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Homeless(
-    val email: String, val firstName: String,
-    val lastName: String, val phone: String,
-    val needsHome: Boolean, val dateAdded: String
+    var email: String, var firstName: String?,
+    var lastName: String?, var phone: String?,
+    var needsHome: Boolean?, var approximateLocation: String?,
+    var latitude: Double?, var longitude: Double?, var imageUri: String?,
+    var imagePath: String?, var dateAdded: String?
 ) : Parcelable

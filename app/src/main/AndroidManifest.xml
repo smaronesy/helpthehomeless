@@ -19,6 +19,9 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -29,6 +32,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HelpTheHomeless"
         tools:targetApi="31">
+
+        <provider
+            android:authorities="app.htheh.helpthehomeless"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_file"/>
+        </provider>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
