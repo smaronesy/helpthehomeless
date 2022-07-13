@@ -43,6 +43,38 @@ data class HomelessEntity(
     var dateAdded: String?
 )
 
+fun HomelessEntity.toHomeless(): Homeless {
+    return Homeless(
+        email = email,
+        firstName = firstName,
+        lastName = lastName,
+        phone = phone,
+        needsHome = needsHome,
+        approximateLocation = approximateLocation,
+        latitude = latitude,
+        longitude = longitude,
+        imageUri = imageUri,
+        imagePath = imagePath,
+        dateAdded = dateAdded
+    )
+}
+
+fun Homeless.toHomelessEntity(): HomelessEntity {
+    return HomelessEntity(
+        email = email,
+        firstName = firstName,
+        lastName = lastName,
+        phone = phone,
+        needsHome = needsHome,
+        approximateLocation = approximateLocation,
+        latitude = latitude,
+        longitude = longitude,
+        imageUri = imageUri,
+        imagePath = imagePath,
+        dateAdded = dateAdded
+    )
+}
+
 fun List<HomelessEntity>.asDomainModel(): List<Homeless> {
     return map {
         Homeless(

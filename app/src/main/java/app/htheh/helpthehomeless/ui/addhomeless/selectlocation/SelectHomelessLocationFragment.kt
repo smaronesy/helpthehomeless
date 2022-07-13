@@ -131,8 +131,6 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
         setDisplayHomeAsUpEnabled(true)
 
         homeLess = SelectHomelessLocationFragmentArgs.fromBundle(arguments!!).homeless
-        homeLess.latitude = addHomelessViewModel.latitude.value
-        homeLess.longitude = addHomelessViewModel.longitude.value
 
         // add the map setup implementation
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
@@ -341,6 +339,8 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
                 } else {
                     addHomelessViewModel.selectedLocationStr.value = "Random Location"
                 }
+                homeLess.latitude = addHomelessViewModel.latitude.value
+                homeLess.longitude = addHomelessViewModel.longitude.value
                 this.findNavController().navigate(SelectHomelessLocationFragmentDirections.actionUploadPhoto(homeLess))
             } else {
                 Toast.makeText(this.requireContext(), "Please select a location", Toast.LENGTH_SHORT).show()

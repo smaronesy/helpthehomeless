@@ -30,7 +30,7 @@ class RecyclerViewAdapater(val clickListener: HomelessListener): ListAdapter<Hom
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        println("First Name is: " + item.firstName)
+        println("First Name is: " + item.email)
         holder.bind(item!!, clickListener)
     }
 

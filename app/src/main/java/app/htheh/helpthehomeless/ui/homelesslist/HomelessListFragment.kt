@@ -51,12 +51,6 @@ class HomelessListFragment : Fragment() {
             homelessListViewModel.onHomelessDetailNavigated()
         }})
 
-        val hl1 = Homeless("souhayl@gmail.com", "Souhayl", "Maronesy", "6194169878", true, "next to walmart", 12.1, 53.1, "hello.com", "pathttoimage", "2022-06-26")
-        val hl2 = Homeless("petera@gmail.com", "Peter", "Adams", "6124199428", false, "next to the mall", 24.1, 30.1, "helloTwo.com", "pathttoimage", "2021-05-02", )
-
-        // testing the db
-        homelessListViewModel.addListOfHomelesses(listOf(hl1, hl2))
-
         homelessListViewModel.homeleesses.observe(viewLifecycleOwner, Observer {
             adapater.submitList(it)
         })

@@ -57,22 +57,12 @@ class UploadHomelessPhotoFragment : Fragment() {
         addHomelessViewModel = ViewModelProvider(this).get(AddHomelessViewModel::class.java)
 
         homeLess = SelectHomelessLocationFragmentArgs.fromBundle(arguments!!).homeless
-        homeLess.imageUri = addHomelessViewModel.photoURI.value.toString()
-        homeLess.imagePath = addHomelessViewModel.photoAbsolutePath.value
 
+        // Makes sure images are retrieved after configuration changes such as rotation
         if(savedInstanceState != null){
-            val homeless = savedInstanceState.getSerializable(KEY_HOMELESS) as Homeless
-            addHomelessViewModel.homelessEmail.value = homeless.email
-            addHomelessViewModel.homelessFirstName.value = homeless.firstName
-            addHomelessViewModel.homelessLastName.value = homeless.lastName
-            addHomelessViewModel.homelessPhone.value = homeless.phone
-            addHomelessViewModel.needsShelter.value = homeless.needsHome
-            addHomelessViewModel.approximateLocation.value = homeless.approximateLocation
-            addHomelessViewModel.latitude.value = homeless.latitude
-            addHomelessViewModel.longitude.value = homeless.longitude
-            addHomelessViewModel.photoURI.value = Uri.parse("http://stackoverflow.com")
-            addHomelessViewModel.photoAbsolutePath.value = homeless.imagePath
-            addHomelessViewModel.dateAdded.value = homeless.dateAdded
+            val homeless = savedInstanceState.getParcelable(KEY_HOMELESS) as Homeless?
+            addHomelessViewModel.photoURI.value = Uri.parse(homeless!!.imageUri)
+            addHomelessViewModel.photoAbsolutePath.value = homeless!!.imagePath
         }
 
         // Inflate the layout for this fragment
@@ -105,31 +95,36 @@ class UploadHomelessPhotoFragment : Fragment() {
             binding.cameraImage.setImageResource(R.drawable.ic_photo_camera_128)
         }
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.saveProfile.setOnClickListener {
+            // get walk score (crime scor)
+            addHomelessViewModel.latitude.value = homeLess.latitude
+            addHomelessViewModel.longitude.value = homeLess.longitude
+            addHomelessViewModel.getWalkScore()
+
             // TODO save homeless to database
+            homeLess.imageUri = addHomelessViewModel.photoURI.value.toString()
+            homeLess.imagePath = addHomelessViewModel.photoAbsolutePath.value
+            addHomelessViewModel.addHomeless(homeLess)
             // TODO Save geofencing
 
             // Navigate to Homeless List Screen
             this.findNavController().navigate(UploadHomelessPhotoFragmentDirections.actionToHomelessList())
         }
-
-        return binding.root
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         val homeless = Homeless(
-            homeLess.email!!,
-            homeLess.firstName,
-            homeLess.lastName,
-            homeLess.phone,
-            homeLess.needsHome,
-            homeLess.approximateLocation,
-            homeLess.latitude,
-            homeLess.longitude,
-            addHomelessViewModel.photoURI.value.toString(),
-            addHomelessViewModel.photoAbsolutePath.value,
-            homeLess.dateAdded
+            homeLess.email!!, homeLess.firstName, homeLess.lastName,
+            homeLess.phone, homeLess.needsHome, homeLess.approximateLocation,
+            homeLess.latitude, homeLess.longitude, addHomelessViewModel.photoURI.value.toString(),
+            addHomelessViewModel.photoAbsolutePath.value, homeLess.dateAdded
         )
         outState.putParcelable(KEY_HOMELESS, homeless)
     }
@@ -188,21 +183,6 @@ class UploadHomelessPhotoFragment : Fragment() {
             FileProvider.getUriForFile(this.requireContext(),"app.htheh.helpthehomeless", filePhoto)
         takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, providerFile)
         startActivityForResult(takePhotoIntent, CAM_PHOTO_REQUEST_CODE)
-//        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            // Ensure that there's a camera activity to handle the intent
-//            takePictureIntent.resolveActivity(this.requireContext().packageManager)?.also {
-//                // Create the File where the photo should go
-//                filePhoto = createImageFile(FILE_NAME)
-//                // Continue only if the File was successfully created
-//                filePhoto?.also {
-//                    val photoURI: Uri = FileProvider.getUriForFile(
-//                        this.requireContext(),
-//                        "app.htheh.helpthehomeless",
-//                        it
-//                    )
-//                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-//                }
-//            }
-//            startActivityForResult(takePictureIntent, CAM_PHOTO_REQUEST_CODE)
-        }
+    }
+
 }

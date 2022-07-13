@@ -54,7 +54,9 @@ open class HomelessLocalRepository(
     }
 
     override suspend fun addHomeless(homeless: HomelessEntity) {
-        TODO("Not yet implemented")
+        withContext(Dispatchers.IO) {
+            homelessDao.insert(homeless)
+        }
     }
 
     override suspend fun getHomeleessByEmail(email: String): Result<HomelessEntity> {
