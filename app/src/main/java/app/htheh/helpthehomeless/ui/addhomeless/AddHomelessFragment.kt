@@ -56,8 +56,8 @@ class AddHomelessFragment : Fragment() {
                 addHomelessViewModel.homelessLastName.value, addHomelessViewModel.homelessPhone.value,
                 addHomelessViewModel.needsShelter.value, addHomelessViewModel.approximateLocation.value,
                 addHomelessViewModel.latitude.value, addHomelessViewModel.longitude.value,
-                addHomelessViewModel.photoURI.value.toString(), addHomelessViewModel.photoAbsolutePath.value,
-                addHomelessViewModel.dateAdded.value
+                addHomelessViewModel.walkScore.value, addHomelessViewModel.photoURI.value.toString(),
+                addHomelessViewModel.photoAbsolutePath.value, addHomelessViewModel.dateAdded.value
             )
             this.findNavController().navigate(AddHomelessFragmentDirections.actionSelectLocation(homeless))
         }

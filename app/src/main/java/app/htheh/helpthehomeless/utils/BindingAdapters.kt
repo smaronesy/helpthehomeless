@@ -42,3 +42,8 @@ fun bindHomelessEmail(textView: TextView, email: String){
 fun bindHomelessPhone(textView: TextView, phone: String){
     textView.text = phone
 }
+
+@BindingAdapter("walkScore")
+fun bindHomelessAreaWalkscore(textView: TextView, walkScore: String){
+    textView.text = walkScore
+}

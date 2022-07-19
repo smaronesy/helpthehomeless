@@ -67,8 +67,26 @@
         tools:layout="@layout/fragment_upload_homeless_photo">
 
         <action
+            android:id="@+id/action_toReviewSave"
+            app:destination="@+id/reviewSaveFragment"/>
+
+        <argument
+            android:name="homeless"
+            app:argType="app.htheh.helpthehomeless.model.Homeless"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/reviewSaveFragment"
+        android:name="app.htheh.helpthehomeless.ui.addhomeless.ReviewAndSaveProfileFragment"
+        android:label="Review and Save Homeless Profile"
+        tools:layout="@layout/fragment_review_and_save_profile">
+
+        <action
             android:id="@+id/action_toHomelessList"
-            app:destination="@+id/homelessListFragment"/>
+            app:destination="@+id/homelessListFragment"
+            app:popUpTo="@id/homelessListFragment"
+            app:popUpToInclusive="true" />
 
         <argument
             android:name="homeless"

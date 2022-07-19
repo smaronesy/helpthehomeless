@@ -33,6 +33,9 @@ interface CrimeApiServiice {
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
         @Query("address") address: String,
+        @Query("format") format: String,
+        @Query("bike") bike: Int,
+        @Query("transit") transit: Int
     ): Call<String>
 }
 

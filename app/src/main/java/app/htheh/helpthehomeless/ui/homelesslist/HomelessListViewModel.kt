@@ -22,9 +22,9 @@ class HomelessListViewModel(application: Application) : HomelessViewModel(applic
     }
 
     private val database = getInstance(application)
-    private val homelessLocalRepository = HomelessLocalRepository(database.homelessDao)
+    private val homelessLocalRepository = HomelessLocalRepository(application, database.homelessDao)
 
-    val homeleesses = homelessLocalRepository.homelesses
+    val homelesses = homelessLocalRepository.homelesses
 
 //    val pod = asteroidRepository.picOfDay
 

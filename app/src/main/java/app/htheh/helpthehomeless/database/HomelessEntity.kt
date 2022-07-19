@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import app.htheh.helpthehomeless.model.Homeless
+import java.util.*
 
 @Entity(tableName = "homeless_profile")
 data class HomelessEntity(
@@ -33,6 +34,9 @@ data class HomelessEntity(
     @ColumnInfo(name="longitude")
     var longitude: Double?,
 
+    @ColumnInfo(name="walkScore")
+    var walkScore: Int?,
+
     @ColumnInfo(name="image_uri")
     var imageUri: String?,
 
@@ -40,7 +44,11 @@ data class HomelessEntity(
     var imagePath: String?,
 
     @ColumnInfo(name="date_added")
-    var dateAdded: String?
+    var dateAdded: String?,
+
+    @ColumnInfo(name = "entry_id")
+    val id: String = UUID.randomUUID().toString()
+
 )
 
 fun HomelessEntity.toHomeless(): Homeless {
@@ -53,6 +61,7 @@ fun HomelessEntity.toHomeless(): Homeless {
         approximateLocation = approximateLocation,
         latitude = latitude,
         longitude = longitude,
+        walkScore= walkScore,
         imageUri = imageUri,
         imagePath = imagePath,
         dateAdded = dateAdded
@@ -69,6 +78,7 @@ fun Homeless.toHomelessEntity(): HomelessEntity {
         approximateLocation = approximateLocation,
         latitude = latitude,
         longitude = longitude,
+        walkScore= walkScore,
         imageUri = imageUri,
         imagePath = imagePath,
         dateAdded = dateAdded
@@ -86,6 +96,7 @@ fun List<HomelessEntity>.asDomainModel(): List<Homeless> {
             approximateLocation = it.approximateLocation,
             latitude = it.latitude,
             longitude = it.longitude,
+            walkScore= it.walkScore,
             imageUri = it.imageUri,
             imagePath = it.imagePath,
             dateAdded = it.dateAdded
@@ -104,6 +115,7 @@ fun List<Homeless>.asDatabaseObject(): Array<HomelessEntity> {
             approximateLocation = it.approximateLocation,
             latitude = it.latitude,
             longitude = it.longitude,
+            walkScore= it.walkScore,
             imageUri = it.imageUri,
             imagePath = it.imagePath,
             dateAdded = it.dateAdded

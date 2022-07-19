@@ -1,18 +1,14 @@
 package app.htheh.helpthehomeless.ui.addhomeless
 
 import android.app.Application
-import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.model.PointOfInterest
 import android.net.Uri
 import androidx.lifecycle.viewModelScope
 import app.htheh.helpthehomeless.database.HomelessDatabase
-import app.htheh.helpthehomeless.database.asDatabaseObject
 import app.htheh.helpthehomeless.database.toHomelessEntity
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.repository.HomelessLocalRepository
-import app.htheh.helpthehomeless.repository.HomelessRemoteRepository
 import app.htheh.helpthehomeless.ui.HomelessViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -34,6 +30,7 @@ class AddHomelessViewModel(application: Application) : HomelessViewModel(applica
     val approximateLocation = MutableLiveData<String>()
     val latitude = MutableLiveData<Double>()
     val longitude = MutableLiveData<Double>()
+    val walkScore = MutableLiveData<Int>()
     val photoURI = MutableLiveData<Uri>()
     val photoAbsolutePath = MutableLiveData<String>()
     val dateAdded = MutableLiveData<String>()
@@ -43,23 +40,13 @@ class AddHomelessViewModel(application: Application) : HomelessViewModel(applica
     val selectedPOI = MutableLiveData<PointOfInterest>()
 
     private val database = HomelessDatabase.getInstance(application)
-    private val homelessLocalRepository = HomelessLocalRepository(database.homelessDao)
+    private val homelessLocalRepository = HomelessLocalRepository(application, database.homelessDao)
 
     val homeleesses = homelessLocalRepository.homelesses
 
-    private val homelessRemoteRepository = HomelessRemoteRepository(application, latitude, longitude)
-
-
-    fun addHomeless(hl: Homeless){
+    fun addHomeless(hl: Homeless, encodedAddress: String){
         viewModelScope.launch {
-            homelessLocalRepository.addHomeless(hl.toHomelessEntity())
+            homelessLocalRepository.addHomeless(hl.toHomelessEntity(), encodedAddress)
         }
     }
-
-    fun getWalkScore(){
-        viewModelScope.launch {
-            homelessRemoteRepository.getWalkScore()
-        }
-    }
-
 }

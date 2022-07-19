@@ -1,31 +1,50 @@
 package app.htheh.helpthehomeless.ui.addhomeless.savephoto
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.PendingIntent
+import android.content.ContentResolver
+import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.location.Address
+import android.location.Geocoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import app.htheh.helpthehomeless.BuildConfig
 import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.databinding.FragmentUploadHomelessPhotoBinding
+import app.htheh.helpthehomeless.geofence.GeofenceBroadcastReceiver
+import app.htheh.helpthehomeless.geofence.GeofencingConstants
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.ui.addhomeless.AddHomelessViewModel
 import app.htheh.helpthehomeless.ui.addhomeless.selectlocation.SelectHomelessLocationFragmentArgs
-import app.htheh.helpthehomeless.utils.bindHomelessEmail
+import app.htheh.helpthehomeless.utils.States
+import com.google.android.gms.location.Geofence
+import com.google.android.gms.location.GeofencingClient
+import com.google.android.gms.location.GeofencingRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.material.snackbar.Snackbar
+import com.udacity.project4.locationreminders.savereminder.*
 import java.io.File
 import java.io.IOException
+import java.net.URLEncoder
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,6 +60,11 @@ private const val KEY_HOMELESS = "homeless"
  * create an instance of this fragment.
  */
 class UploadHomelessPhotoFragment : Fragment() {
+
+    companion object {
+        internal const val ACTION_GEOFENCE_EVENT =
+            "Homeless.addLocation.action.ACTION_GEOFENCE_EVENT"
+    }
 
     private lateinit var addHomelessViewModel: AddHomelessViewModel
     private lateinit var binding: FragmentUploadHomelessPhotoBinding
@@ -102,19 +126,13 @@ class UploadHomelessPhotoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.saveProfile.setOnClickListener {
-            // get walk score (crime scor)
-            addHomelessViewModel.latitude.value = homeLess.latitude
-            addHomelessViewModel.longitude.value = homeLess.longitude
-            addHomelessViewModel.getWalkScore()
 
-            // TODO save homeless to database
+            //add imageUri and imagePath to homeLess object
             homeLess.imageUri = addHomelessViewModel.photoURI.value.toString()
             homeLess.imagePath = addHomelessViewModel.photoAbsolutePath.value
-            addHomelessViewModel.addHomeless(homeLess)
-            // TODO Save geofencing
 
-            // Navigate to Homeless List Screen
-            this.findNavController().navigate(UploadHomelessPhotoFragmentDirections.actionToHomelessList())
+            // Navigate to review and save
+            this.findNavController().navigate(UploadHomelessPhotoFragmentDirections.actionToReviewSave(homeLess))
         }
     }
 
@@ -123,7 +141,7 @@ class UploadHomelessPhotoFragment : Fragment() {
         val homeless = Homeless(
             homeLess.email!!, homeLess.firstName, homeLess.lastName,
             homeLess.phone, homeLess.needsHome, homeLess.approximateLocation,
-            homeLess.latitude, homeLess.longitude, addHomelessViewModel.photoURI.value.toString(),
+            homeLess.latitude, homeLess.longitude, homeLess.walkScore, addHomelessViewModel.photoURI.value.toString(),
             addHomelessViewModel.photoAbsolutePath.value, homeLess.dateAdded
         )
         outState.putParcelable(KEY_HOMELESS, homeless)
@@ -151,6 +169,8 @@ class UploadHomelessPhotoFragment : Fragment() {
             binding.libraryImage.setImageResource(R.drawable.ic_photo_library_128)
         } else if(requestCode == LIB_PHOTO_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             addHomelessViewModel.photoURI.value = data?.data
+            // Makes sure app still has access after relaunch
+            this.requireActivity().contentResolver.takePersistableUriPermission(data?.data!!, Intent.FLAG_GRANT_READ_URI_PERMISSION)
             addHomelessViewModel.photoAbsolutePath.value = null
             binding.libraryImage.setImageURI(data?.data)
             binding.cameraImage.setImageResource(R.drawable.ic_photo_camera_128)
@@ -160,8 +180,11 @@ class UploadHomelessPhotoFragment : Fragment() {
     }
 
     private fun chooseImageGallery() {
-        val intent = Intent(Intent.ACTION_PICK)
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "image/*"
+        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         startActivityForResult(intent, LIB_PHOTO_REQUEST_CODE)
     }
 
@@ -184,5 +207,4 @@ class UploadHomelessPhotoFragment : Fragment() {
         takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, providerFile)
         startActivityForResult(takePhotoIntent, CAM_PHOTO_REQUEST_CODE)
     }
-
 }

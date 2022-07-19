@@ -37,6 +37,13 @@
     <string name="location_required_error">Location services must be enabled to use the app</string>
     <string name="dropped_pin">Dropped Pin</string>
     <string name="upload_homeless_photo">Upload Homeless Photo</string>
+    <string name="geofence_entered">Geofence Entered</string>
+    <string name="geofences_added">geofence added</string>
+    <string name="geofences_not_added">Problem in adding geofences.</string>
+    <string name="geofence_not_available">Geofence service is not available now. Go to Settings>Location>Mode and choose High accuracy.</string>
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences.</string>
+    <string name="geofence_too_many_pending_intents">You have provided too many PendingIntents to the addGeofences() call.</string>
+    <string name="unknown_geofence_error">Unknown geofence error</string>
     <string name="gep_permission_denied_explanation">Please grant background permissions to save geofence</string>
     <string name="permission_denied_explanation">You need to grant location permission in order to select the location.</string>
 </resources>

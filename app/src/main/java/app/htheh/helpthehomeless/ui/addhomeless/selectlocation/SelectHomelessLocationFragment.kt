@@ -334,13 +334,14 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
                 // A Snippet is Additional text that's displayed below the title.
                 addHomelessViewModel.latitude.value = coordinates!!.latitude
                 addHomelessViewModel.longitude.value = coordinates!!.longitude
+
+                homeLess.latitude = coordinates!!.latitude
+                homeLess.longitude = coordinates!!.longitude
                 if(pioName != null){
                     addHomelessViewModel.selectedLocationStr.value = pioName
                 } else {
                     addHomelessViewModel.selectedLocationStr.value = "Random Location"
                 }
-                homeLess.latitude = addHomelessViewModel.latitude.value
-                homeLess.longitude = addHomelessViewModel.longitude.value
                 this.findNavController().navigate(SelectHomelessLocationFragmentDirections.actionUploadPhoto(homeLess))
             } else {
                 Toast.makeText(this.requireContext(), "Please select a location", Toast.LENGTH_SHORT).show()
