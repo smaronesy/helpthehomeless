@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import app.htheh.helpthehomeless.BuildConfig
 import app.htheh.helpthehomeless.R
@@ -23,6 +24,7 @@ import app.htheh.helpthehomeless.databinding.FragmentSelectHomelessLocationBindi
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.ui.addhomeless.AddHomelessViewModel
 import app.htheh.helpthehomeless.ui.homelesslist.HomelessListFragmentDirections
+import app.htheh.helpthehomeless.utils.getEncodedAddress
 import app.htheh.helpthehomeless.utils.setDisplayHomeAsUpEnabled
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -39,7 +41,9 @@ import com.udacity.project4.locationreminders.savereminder.getLocationSettingsRe
 import com.udacity.project4.locationreminders.savereminder.requestDeviceLocationPermissions
 import com.udacity.project4.locationreminders.savereminder.requestForegroundLocationPermissions
 import kotlinx.android.synthetic.main.fragment_select_homeless_location.*
+import kotlinx.coroutines.launch
 import java.util.*
+import org.koin.android.ext.android.inject
 
 /**
  * A simple [Fragment] subclass.
@@ -48,7 +52,7 @@ import java.util.*
  */
 class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
 
-    private lateinit var addHomelessViewModel: AddHomelessViewModel
+    val addHomelessViewModel: AddHomelessViewModel by inject()
     private lateinit var binding: FragmentSelectHomelessLocationBinding
     private lateinit var homeLess: Homeless
 
@@ -121,7 +125,6 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        addHomelessViewModel = ViewModelProvider(this).get(AddHomelessViewModel::class.java)
 
         binding = FragmentSelectHomelessLocationBinding.inflate(inflater, container, false)
         binding.addHomelessViewModel = addHomelessViewModel
@@ -131,6 +134,10 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
         setDisplayHomeAsUpEnabled(true)
 
         homeLess = SelectHomelessLocationFragmentArgs.fromBundle(arguments!!).homeless
+
+        addHomelessViewModel.walkScore.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            homeLess.walkScore = it
+        })
 
         // add the map setup implementation
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
@@ -337,11 +344,13 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
 
                 homeLess.latitude = coordinates!!.latitude
                 homeLess.longitude = coordinates!!.longitude
+
                 if(pioName != null){
                     addHomelessViewModel.selectedLocationStr.value = pioName
                 } else {
                     addHomelessViewModel.selectedLocationStr.value = "Random Location"
                 }
+
                 this.findNavController().navigate(SelectHomelessLocationFragmentDirections.actionUploadPhoto(homeLess))
             } else {
                 Toast.makeText(this.requireContext(), "Please select a location", Toast.LENGTH_SHORT).show()

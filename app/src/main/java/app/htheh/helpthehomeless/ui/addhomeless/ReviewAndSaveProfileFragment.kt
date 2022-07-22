@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -14,7 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import app.htheh.helpthehomeless.BuildConfig
 import app.htheh.helpthehomeless.R
@@ -24,13 +25,16 @@ import app.htheh.helpthehomeless.geofence.GeofencingConstants
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.ui.addhomeless.savephoto.UploadHomelessPhotoFragment
 import app.htheh.helpthehomeless.ui.addhomeless.savephoto.UploadHomelessPhotoFragmentArgs
+import app.htheh.helpthehomeless.utils.getEncodedAddress
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
-import com.udacity.project4.locationreminders.savereminder.*
-import app.htheh.helpthehomeless.utils.getEncodedAddress
 import com.google.android.material.snackbar.Snackbar
+import com.udacity.project4.locationreminders.savereminder.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.inject
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
@@ -46,7 +50,7 @@ private const val LOCATION_PERMISSION_INDEX = 1
  */
 class ReviewAndSaveProfileFragment : Fragment() {
 
-    private lateinit var addHomelessViewModel: AddHomelessViewModel
+    val addHomelessViewModel: AddHomelessViewModel by inject()
     private lateinit var binding: FragmentReviewAndSaveProfileBinding
     private lateinit var homeLess: Homeless
 
@@ -78,7 +82,7 @@ class ReviewAndSaveProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        addHomelessViewModel = ViewModelProvider(this).get(AddHomelessViewModel::class.java)
+//        addHomelessViewModel = ViewModelProvider(this).get(AddHomelessViewModel::class.java)
 
         homeLess = UploadHomelessPhotoFragmentArgs.fromBundle(arguments!!).homeless
 
@@ -86,6 +90,17 @@ class ReviewAndSaveProfileFragment : Fragment() {
         binding = FragmentReviewAndSaveProfileBinding.inflate(inflater, container, false)
 
         binding.homeless = homeLess
+
+        if(homeLess?.imagePath != null){
+            val takenPhoto = BitmapFactory.decodeFile(homeLess.imagePath)
+            binding.ivProfileImage.setImageBitmap(takenPhoto)
+        } else if(homeLess?.imageUri != null) {
+            binding.ivProfileImage.setImageURI(Uri.parse(homeLess.imageUri))
+        }
+
+//        val encodedAddress = getEncodedAddress(this.requireActivity().application, homeLess)
+//        addHomelessViewModel.setWalkScore(homeLess, encodedAddress)
+
 
         return binding.root
     }
@@ -173,8 +188,14 @@ class ReviewAndSaveProfileFragment : Fragment() {
     @SuppressLint("MissingPermission")
     fun addGeofenceForHomeless() {
 
+        // 1) save the reminder to the local db
+        val encodedAddress = getEncodedAddress(this.requireActivity().application, homeLess)
+
+        // TODO get walk score and save homeless to database
+        addHomelessViewModel.addHomeless(homeLess, encodedAddress)
+
         // use the user entered reminder details to:
-        // 1) add a geofencing request
+        // 2) add a geofencing request
         val geofence = Geofence.Builder()
             .setRequestId(homeLess.email)
             .setCircularRegion(
@@ -192,25 +213,23 @@ class ReviewAndSaveProfileFragment : Fragment() {
 
         geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent)?.run {
             addOnSuccessListener {
-                Toast.makeText(requireActivity(), R.string.geofences_added,
-                    Toast.LENGTH_SHORT)
-                    .show()
+                if(activity != null){
+                    Toast.makeText(activity, R.string.geofences_added,
+                        Toast.LENGTH_SHORT)
+                        .show()
+                }
                 Log.e("Add Geofence", geofence.requestId)
             }
             addOnFailureListener {
-                Toast.makeText(requireActivity(), R.string.geofences_not_added,
-                    Toast.LENGTH_SHORT).show()
+                if(activity != null){
+                    Toast.makeText(requireActivity(), R.string.geofences_not_added,
+                        Toast.LENGTH_SHORT).show()
+                }
                 if ((it.message != null)) {
                     Log.w(ContentValues.TAG, it.message.toString())
                 }
             }
         }
-
-        // 2) save the reminder to the local db
-        val encodedAddress = getEncodedAddress(this.requireActivity().application, homeLess)
-
-        // TODO get walk score and save homeless to database
-        addHomelessViewModel.addHomeless(homeLess, encodedAddress)
 
         // Navigate to Homeless List Screen
         this.findNavController().navigate(ReviewAndSaveProfileFragmentDirections.actionToHomelessList())

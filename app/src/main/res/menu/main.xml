@@ -3,18 +3,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/show_all_menu"
-        android:orderInCategory="100"
-        android:title="@string/all_profiles"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/show_week_menu"
-        android:orderInCategory="100"
-        android:title="@string/weeks_profiles"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/show_today_menu"
-        android:orderInCategory="100"
-        android:title="@string/todays_profiles"
-        app:showAsAction="never" />
+        android:id="@+id/logout"
+        android:title="@string/logout"
+        app:showAsAction="always" />
 </menu>

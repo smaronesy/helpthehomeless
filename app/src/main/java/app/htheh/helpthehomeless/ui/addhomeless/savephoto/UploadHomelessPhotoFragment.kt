@@ -1,52 +1,34 @@
 package app.htheh.helpthehomeless.ui.addhomeless.savephoto
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.PendingIntent
-import android.content.ContentResolver
-import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
-import android.location.Address
-import android.location.Geocoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import app.htheh.helpthehomeless.BuildConfig
 import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.databinding.FragmentUploadHomelessPhotoBinding
-import app.htheh.helpthehomeless.geofence.GeofenceBroadcastReceiver
-import app.htheh.helpthehomeless.geofence.GeofencingConstants
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.ui.addhomeless.AddHomelessViewModel
 import app.htheh.helpthehomeless.ui.addhomeless.selectlocation.SelectHomelessLocationFragmentArgs
-import app.htheh.helpthehomeless.utils.States
-import com.google.android.gms.location.Geofence
-import com.google.android.gms.location.GeofencingClient
-import com.google.android.gms.location.GeofencingRequest
-import com.google.android.gms.location.LocationServices
-import com.google.android.material.snackbar.Snackbar
 import com.udacity.project4.locationreminders.savereminder.*
 import java.io.File
 import java.io.IOException
-import java.net.URLEncoder
 import java.text.SimpleDateFormat
 import java.util.*
+import org.koin.android.ext.android.inject
+
 
 private const val FILE_NAME = "homeless"
 private const val CAM_PHOTO_REQUEST_CODE = 13
@@ -66,7 +48,7 @@ class UploadHomelessPhotoFragment : Fragment() {
             "Homeless.addLocation.action.ACTION_GEOFENCE_EVENT"
     }
 
-    private lateinit var addHomelessViewModel: AddHomelessViewModel
+    val addHomelessViewModel: AddHomelessViewModel by inject()
     private lateinit var binding: FragmentUploadHomelessPhotoBinding
     private lateinit var homeLess: Homeless
     private lateinit var filePhoto: File
@@ -77,8 +59,6 @@ class UploadHomelessPhotoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        addHomelessViewModel = ViewModelProvider(this).get(AddHomelessViewModel::class.java)
 
         homeLess = SelectHomelessLocationFragmentArgs.fromBundle(arguments!!).homeless
 

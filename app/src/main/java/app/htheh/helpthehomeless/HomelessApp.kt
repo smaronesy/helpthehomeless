@@ -22,23 +22,26 @@ class HomelessApp : Application() {
             //Declare a ViewModel - be later inject into Fragment with dedicated injector using by viewModel()
             viewModel {
                 HomelessListViewModel(
-                    get()
+                    get(), get()
                 )
             }
+            
+
             /**
              * single: indicates a singleton (only one instance)
              * factory: indicates a factory (defines a new instance everytime)
              */
             //Declare singleton definitions to be later injected using by inject()
+
             single {
-                //This view model is declared singleton to be used across multiple fragments
                 AddHomelessViewModel(
+                    get(),
                     get()
                 )
             }
 
             single {
-                HomelessLocalRepository(get(), get())
+                HomelessLocalRepository(get())
             }
 
             single {

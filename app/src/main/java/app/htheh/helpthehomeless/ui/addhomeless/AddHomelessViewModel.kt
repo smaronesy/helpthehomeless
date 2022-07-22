@@ -1,19 +1,20 @@
 package app.htheh.helpthehomeless.ui.addhomeless
 
 import android.app.Application
-import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.maps.model.PointOfInterest
 import android.net.Uri
+import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import app.htheh.helpthehomeless.database.HomelessDatabase
+import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.database.toHomelessEntity
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.repository.HomelessLocalRepository
 import app.htheh.helpthehomeless.ui.HomelessViewModel
+import com.google.android.gms.maps.model.PointOfInterest
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class AddHomelessViewModel(application: Application) : HomelessViewModel(application) {
+class AddHomelessViewModel(application: Application, val homelessLocalRepository: HomelessLocalRepository) : HomelessViewModel(application) {
 
     private var viewModelJob = Job()
 
@@ -37,16 +38,45 @@ class AddHomelessViewModel(application: Application) : HomelessViewModel(applica
 
     val fgLocationPermission = MutableLiveData<Boolean>()
     val selectedLocationStr = MutableLiveData<String>()
-    val selectedPOI = MutableLiveData<PointOfInterest>()
 
-    private val database = HomelessDatabase.getInstance(application)
-    private val homelessLocalRepository = HomelessLocalRepository(application, database.homelessDao)
+    fun onClear() {
 
-    val homeleesses = homelessLocalRepository.homelesses
+        homelessEmail.value = null
+        homelessFirstName.value = null
+        homelessLastName.value = null
+        homelessPhone.value = null
+        needsShelter.value = null
+        approximateLocation.value = null
+        latitude.value = null
+        longitude.value = null
+        walkScore.value = null
+        photoURI.value = null
+        photoAbsolutePath.value = null
+        dateAdded.value = null
+        fgLocationPermission.value = null
+        selectedLocationStr.value = null
+    }
+
+//    private val database = HomelessDatabase.getInstance(application)
+//    private val homelessLocalRepository = HomelessLocalRepository(application, database.homelessDao)
+
+//    val homeleesses = homelessLocalRepository.homelesses
+
+//    fun setWalkScore(hl: Homeless, encodedAddress: String){
+//        viewModelScope.launch {
+//            homelessLocalRepository.getWalkScore(hl, encodedAddress)
+//            walkScore.value = homelessLocalRepository.walkScore.value
+//        }
+//    }
 
     fun addHomeless(hl: Homeless, encodedAddress: String){
         viewModelScope.launch {
             homelessLocalRepository.addHomeless(hl.toHomelessEntity(), encodedAddress)
+            onClear()
         }
     }
+
+    /**
+     * Validate the entered data and show error to the user if there's any invalid data
+     */
 }

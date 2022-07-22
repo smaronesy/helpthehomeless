@@ -13,12 +13,15 @@ import androidx.navigation.fragment.findNavController
 import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.databinding.FragmentHomelessListBinding
 import app.htheh.helpthehomeless.repository.Filter
+import app.htheh.helpthehomeless.ui.AuthenticationActivity
 import app.htheh.helpthehomeless.ui.HomelessProfileActivity
+import com.firebase.ui.auth.AuthUI
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomelessListFragment : Fragment() {
 
     private var _binding: FragmentHomelessListBinding? = null
-    private lateinit var homelessListViewModel: HomelessListViewModel
+    val homelessListViewModel: HomelessListViewModel by viewModel()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -30,8 +33,6 @@ class HomelessListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        homelessListViewModel =
-            ViewModelProvider(this).get(HomelessListViewModel::class.java)
 
         _binding = FragmentHomelessListBinding.inflate(inflater, container, false)
 
@@ -77,16 +78,18 @@ class HomelessListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        homelessListViewModel.updateHomelessWithFilter(
-            when(item.itemId) {
-                R.id.show_week_menu -> Filter.WEEK
-                R.id.show_today_menu -> Filter.TODAY
-                else -> Filter.SAVED
-            })
-        return true
+        when (item.itemId) {
+            R.id.logout -> {
+                // add the logout implementation
+                AuthUI.getInstance().signOut(requireActivity().applicationContext).addOnCompleteListener {
+                    if(it.isSuccessful){
+                        var authInt = Intent(this.requireContext(), AuthenticationActivity::class.java)
+                        startActivity(authInt)
+                    }
+                }
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
-private const val REQUEST_CODE_DEVICE_LOCATION_SETTINGS = 27
-private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
-private const val REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE = 33
-private const val LOCATION_PERMISSION_INDEX = 1

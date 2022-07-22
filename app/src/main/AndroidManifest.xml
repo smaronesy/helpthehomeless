@@ -59,7 +59,8 @@
 
         <activity
             android:name=".ui.HomelessProfileActivity"
-            android:label="Homeless Profile"/>
+            android:label="Homeless Profile"
+            android:theme="@style/Theme.HelpTheHomeless.NoActionBar"/>
 
         <activity
             android:name=".ui.HomelessActivity"

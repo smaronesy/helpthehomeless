@@ -6,8 +6,7 @@ import android.util.Log
 import androidx.core.app.JobIntentService
 import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.database.HomelessEntity
-import app.htheh.helpthehomeless.database.Result
-import app.htheh.helpthehomeless.database.Result.*
+import app.htheh.helpthehomeless.database.Result.Success
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.repository.HomelessLocalRepository
 import app.htheh.helpthehomeless.ui.addhomeless.savephoto.UploadHomelessPhotoFragment.Companion.ACTION_GEOFENCE_EVENT
@@ -63,6 +62,7 @@ class GeofenceTransitionsJobIntentService : JobIntentService(), CoroutineScope {
 
     // Loop through the geofence so all notification are sent
     private fun geofenceIterator(triggeringGeofences: List<Geofence>) {
+        println("GEO List Size: " + triggeringGeofences.size)
         for(geo in triggeringGeofences){
             sendNotification(geo)
         }
@@ -76,8 +76,9 @@ class GeofenceTransitionsJobIntentService : JobIntentService(), CoroutineScope {
 //        Interaction to the repository has to be through a coroutine scope
         CoroutineScope(coroutineContext).launch(SupervisorJob()) {
             //get the homeless with the request id (email)
+            println("Result BEING PRITNED: " + requestId)
             val result = homelessLocalRepository.getHomelessByEmail(requestId)
-            println(result.toString())
+            println("EMAIL BEING PRITNED: " + result)
             if (result is Success<HomelessEntity>) {
                 val homelessEntity = result.data
                 println("FROM sendNotifications: " + homelessEntity.email)

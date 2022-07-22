@@ -11,11 +11,13 @@
         <entry key="app/src/main/res/drawable/ic_photo_library_128.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_authentication.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/activity_homeless.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_homeless_profile.xml" value="0.12760416666666666" />
+        <entry key="app/src/main/res/layout/activity_homeless_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.20729166666666668" />
+        <entry key="app/src/main/res/layout/app_bar_main_profile.xml" value="0.1375" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.26856884057971014" />
+        <entry key="app/src/main/res/layout/content_profile.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/layout/fragment_add_homeless.xml" value="0.14166666666666666" />
         <entry key="app/src/main/res/layout/fragment_homeless_list.xml" value="0.20729166666666668" />
         <entry key="app/src/main/res/layout/fragment_homeless_profile.xml" value="0.2128623188405797" />

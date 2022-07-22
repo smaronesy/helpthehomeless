@@ -34,11 +34,6 @@ class HomelessActivity : AppCompatActivity() {
         // Setting the toolbar
         setSupportActionBar(binding.appBarMain.toolbar)
 
-//        binding.appBarMain.fab.setOnClickListener { view ->
-//            Snackbar.make(view, "When clicked should go to AddHomelessFragment", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
-
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -68,5 +63,4 @@ class HomelessActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
 }
