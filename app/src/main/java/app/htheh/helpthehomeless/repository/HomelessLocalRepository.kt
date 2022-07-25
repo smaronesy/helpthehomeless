@@ -13,7 +13,6 @@ import app.htheh.helpthehomeless.database.asDomainModel
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.utils.Constants
 import app.htheh.helpthehomeless.utils.wrapEspressoIdlingResource
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -61,15 +60,15 @@ open class HomelessLocalRepository(
 
     suspend fun addHomeless(homeless: HomelessEntity, encodedAddress: String) {
         withContext(Dispatchers.IO) {
-//            try {
-//                val response = WalkScoreApi.retrofitService.getProperties(Constants.API_KEY,
-//                    homeless.latitude!!, homeless.longitude!!, encodedAddress, "json", 1, 1).awaitResponse()
-//                val jsonBody = JSONObject(response.body())
-//                homeless.walkScore =  parseWalkScoreJsonResult(jsonBody)
-//                println("WALK SCORE IS " + jsonBody)
-//            } catch (e: Exception) {
-//                Log.e("API CALL ERROR", e.message.toString())
-//            }
+            try {
+                val response = WalkScoreApi.retrofitService.getProperties(Constants.API_KEY,
+                    homeless.latitude!!, homeless.longitude!!, encodedAddress, "json", 1, 1).awaitResponse()
+                val jsonBody = JSONObject(response.body())
+                homeless.walkScore =  parseWalkScoreJsonResult(jsonBody)
+                println("WALK SCORE IS " + jsonBody)
+            } catch (e: Exception) {
+                Log.e("API CALL ERROR", e.message.toString())
+            }
             homelessDao.insert(homeless)
         }
     }

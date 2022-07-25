@@ -1,7 +1,9 @@
 package app.htheh.helpthehomeless.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +14,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.databinding.ActivityHomelessBinding
+import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
 
 class HomelessActivity : AppCompatActivity() {
@@ -24,7 +27,6 @@ class HomelessActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityHomelessBinding.inflate(layoutInflater)
-
         // Setting the activity layout
         setContentView(binding.root)
 
@@ -37,11 +39,11 @@ class HomelessActivity : AppCompatActivity() {
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Passing each menu ID as a set of Ids because each
+        // Passing each menu ID as a set of Ids beøcause each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.homelessListFragment, R.id.nav_stats,
+                R.id.nav_home, R.id.nav_about
             ), drawerLayout
         )
 
@@ -62,5 +64,20 @@ class HomelessActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout -> {
+                // add the logout implementation
+                AuthUI.getInstance().signOut(this).addOnCompleteListener {
+                    if(it.isSuccessful){
+                        var authInt = Intent(this, AuthenticationActivity::class.java)
+                        startActivity(authInt)
+                    }
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

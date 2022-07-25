@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/homelessListFragment">
+    app:startDestination="@+id/nav_home">
 
     <fragment
-        android:id="@+id/homelessListFragment"
+        android:id="@+id/nav_home"
         android:name="app.htheh.helpthehomeless.ui.homelesslist.HomelessListFragment"
         android:label="@string/menu_list"
         tools:layout="@layout/fragment_homeless_list">
@@ -19,17 +19,6 @@
             android:id="@+id/action_addHomeless"
             app:destination="@+id/addHomelessFragment" />
 
-    </fragment>
-
-    <fragment
-        android:id="@+id/homelessProfileFragment"
-        android:name="app.htheh.helpthehomeless.ui.homelessprofile.HomelessProfileFragment"
-        android:label="@string/profile_fragment"
-        tools:layout="@layout/fragment_homeless_profile">
-
-        <argument
-            android:name="selectedHomeless"
-            app:argType="app.htheh.helpthehomeless.model.Homeless"/>
     </fragment>
 
     <fragment
@@ -84,8 +73,8 @@
 
         <action
             android:id="@+id/action_toHomelessList"
-            app:destination="@+id/homelessListFragment"
-            app:popUpTo="@id/homelessListFragment"
+            app:destination="@+id/nav_home"
+            app:popUpTo="@id/nav_home"
             app:popUpToInclusive="true" />
 
         <argument
@@ -93,5 +82,21 @@
             app:argType="app.htheh.helpthehomeless.model.Homeless"/>
 
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="app.htheh.helpthehomeless.ui.about.AboutFragment"
+        android:label="About This App"
+        tools:layout="@layout/fragment_about">
+
+    </fragment>
+
+    <activity
+        android:id="@+id/nav_home_a"
+        android:name="app.htheh.helpthehomeless.ui.HomelessActivity"
+        android:label="Homeless List"
+        tools:layout="@layout/activity_homeless">
+
+    </activity>
 
 </navigation>

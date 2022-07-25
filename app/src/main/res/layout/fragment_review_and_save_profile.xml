@@ -15,7 +15,7 @@
         tools:context=".ui.homelessprofile.HomelessProfileFragment">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/image_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -44,12 +44,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
+            android:id="@+id/first_name_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/image_ll"
             app:layout_constraintVertical_bias="0.058">
 
             <TextView
@@ -76,12 +76,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout5"
+            android:id="@+id/last_name_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/first_name_ll"
             app:layout_constraintVertical_bias="0.056">
 
             <TextView
@@ -108,12 +108,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/email2_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+            app:layout_constraintTop_toBottomOf="@+id/last_name_ll"
             app:layout_constraintVertical_bias="0.045">
 
             <TextView
@@ -140,12 +140,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout4"
+            android:id="@+id/phone2_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/email2_ll"
             app:layout_constraintVertical_bias="0.058">
 
             <TextView
@@ -177,7 +177,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+            app:layout_constraintTop_toBottomOf="@+id/phone2_ll"
             app:layout_constraintVertical_bias="0.059">
 
             <TextView

@@ -32,8 +32,6 @@ import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import com.udacity.project4.locationreminders.savereminder.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -98,9 +96,14 @@ class ReviewAndSaveProfileFragment : Fragment() {
             binding.ivProfileImage.setImageURI(Uri.parse(homeLess.imageUri))
         }
 
-//        val encodedAddress = getEncodedAddress(this.requireActivity().application, homeLess)
-//        addHomelessViewModel.setWalkScore(homeLess, encodedAddress)
+        geofencingClient = LocationServices.getGeofencingClient(this.requireActivity())
 
+        addHomelessViewModel.geofencingItemSaved.observe(viewLifecycleOwner, Observer {
+            if(it){
+                addGeoFence()
+                addHomelessViewModel.geofencingItemSaved.value = false
+            }
+        })
 
         return binding.root
     }
@@ -110,7 +113,6 @@ class ReviewAndSaveProfileFragment : Fragment() {
 
         binding.saveProfile.setOnClickListener {
 
-            // TODO Save geofencin
             geofencingClient = LocationServices.getGeofencingClient(this.requireActivity())
 
             if(runningQOrLater) {
@@ -180,13 +182,13 @@ class ReviewAndSaveProfileFragment : Fragment() {
 
         locationSettingsResponseTask.addOnCompleteListener {
             if ( it.isSuccessful ) {
-                addGeofenceForHomeless()
+                addHomelessToDB()
             }
         }
     }
 
     @SuppressLint("MissingPermission")
-    fun addGeofenceForHomeless() {
+    fun addHomelessToDB() {
 
         // 1) save the reminder to the local db
         val encodedAddress = getEncodedAddress(this.requireActivity().application, homeLess)
@@ -194,14 +196,16 @@ class ReviewAndSaveProfileFragment : Fragment() {
         // TODO get walk score and save homeless to database
         addHomelessViewModel.addHomeless(homeLess, encodedAddress)
 
-        // use the user entered reminder details to:
-        // 2) add a geofencing request
+    }
+
+    private fun addGeoFence() {
         val geofence = Geofence.Builder()
             .setRequestId(homeLess.email)
             .setCircularRegion(
                 homeLess.latitude!!,
                 homeLess.longitude!!,
-                GeofencingConstants.GEOFENCE_RADIUS_IN_METERS)
+                GeofencingConstants.GEOFENCE_RADIUS_IN_METERS
+            )
             .setExpirationDuration(Geofence.NEVER_EXPIRE)
             .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
             .build()
@@ -213,17 +217,21 @@ class ReviewAndSaveProfileFragment : Fragment() {
 
         geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent)?.run {
             addOnSuccessListener {
-                if(activity != null){
-                    Toast.makeText(activity, R.string.geofences_added,
-                        Toast.LENGTH_SHORT)
+                if (activity != null) {
+                    Toast.makeText(
+                        activity, R.string.geofences_added,
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
                 Log.e("Add Geofence", geofence.requestId)
             }
             addOnFailureListener {
-                if(activity != null){
-                    Toast.makeText(requireActivity(), R.string.geofences_not_added,
-                        Toast.LENGTH_SHORT).show()
+                if (activity != null) {
+                    Toast.makeText(
+                        requireActivity(), R.string.geofences_not_added,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 if ((it.message != null)) {
                     Log.w(ContentValues.TAG, it.message.toString())
@@ -232,6 +240,8 @@ class ReviewAndSaveProfileFragment : Fragment() {
         }
 
         // Navigate to Homeless List Screen
-        this.findNavController().navigate(ReviewAndSaveProfileFragmentDirections.actionToHomelessList())
+        this.findNavController()
+            .navigate(ReviewAndSaveProfileFragmentDirections.actionToHomelessList())
     }
+
 }

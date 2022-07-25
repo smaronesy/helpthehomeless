@@ -17,13 +17,13 @@
         tools:context=".ui.HomelessProfileActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_anchorGravity="center">
 
             <androidx.constraintlayout.motion.widget.MotionLayout
-                android:id="@+id/motionLayout"
+                android:id="@+id/motion_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutDescription="@xml/main_scene">
@@ -83,12 +83,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/contact_linearLayout"
+                    android:id="@+id/contact_ll"
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/email_ll"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="50dp"
@@ -149,7 +150,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/info_linearLayout"
+                    android:id="@+id/info_ll"
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -187,7 +188,7 @@
                         android:layout_weight="1" />
 
                     <LinearLayout
-                        android:id="@+id/walk_score_linearLayout"
+                        android:id="@+id/walk_score_ll"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="right"

@@ -9,26 +9,20 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import app.htheh.helpthehomeless.BuildConfig
 import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.databinding.FragmentSelectHomelessLocationBinding
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.ui.addhomeless.AddHomelessViewModel
-import app.htheh.helpthehomeless.ui.homelesslist.HomelessListFragmentDirections
-import app.htheh.helpthehomeless.utils.getEncodedAddress
 import app.htheh.helpthehomeless.utils.setDisplayHomeAsUpEnabled
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -41,9 +35,8 @@ import com.udacity.project4.locationreminders.savereminder.getLocationSettingsRe
 import com.udacity.project4.locationreminders.savereminder.requestDeviceLocationPermissions
 import com.udacity.project4.locationreminders.savereminder.requestForegroundLocationPermissions
 import kotlinx.android.synthetic.main.fragment_select_homeless_location.*
-import kotlinx.coroutines.launch
-import java.util.*
 import org.koin.android.ext.android.inject
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.

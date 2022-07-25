@@ -18,9 +18,11 @@
         <entry key="app/src/main/res/layout/app_bar_main_profile.xml" value="0.1375" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.26856884057971014" />
         <entry key="app/src/main/res/layout/content_profile.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.1375" />
         <entry key="app/src/main/res/layout/fragment_add_homeless.xml" value="0.14166666666666666" />
         <entry key="app/src/main/res/layout/fragment_homeless_list.xml" value="0.20729166666666668" />
         <entry key="app/src/main/res/layout/fragment_homeless_profile.xml" value="0.2128623188405797" />
+        <entry key="app/src/main/res/layout/fragment_poverty_stats.xml" value="0.103125" />
         <entry key="app/src/main/res/layout/fragment_review_and_save_profile.xml" value="0.1390625" />
         <entry key="app/src/main/res/layout/fragment_select_homeless_location.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_upload_homeless_photo.xml" value="0.1" />

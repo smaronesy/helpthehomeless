@@ -2,15 +2,12 @@ package app.htheh.helpthehomeless.ui.addhomeless
 
 import android.app.Application
 import android.net.Uri
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.database.toHomelessEntity
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.repository.HomelessLocalRepository
 import app.htheh.helpthehomeless.ui.HomelessViewModel
-import com.google.android.gms.maps.model.PointOfInterest
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -38,6 +35,8 @@ class AddHomelessViewModel(application: Application, val homelessLocalRepository
 
     val fgLocationPermission = MutableLiveData<Boolean>()
     val selectedLocationStr = MutableLiveData<String>()
+
+    val geofencingItemSaved = MutableLiveData<Boolean>()
 
     fun onClear() {
 
@@ -72,6 +71,7 @@ class AddHomelessViewModel(application: Application, val homelessLocalRepository
     fun addHomeless(hl: Homeless, encodedAddress: String){
         viewModelScope.launch {
             homelessLocalRepository.addHomeless(hl.toHomelessEntity(), encodedAddress)
+            geofencingItemSaved.value = true
             onClear()
         }
     }

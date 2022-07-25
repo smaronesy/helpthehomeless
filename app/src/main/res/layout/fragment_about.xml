@@ -3,11 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.povertystats.PovertyStatsFragment">
+    tools:context=".ui.about.AboutFragment">
 
     <TextView
+        android:id="@+id/about_tt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_margin="40dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textSize="20dp"
+        android:text="@string/about_text" />
 
 </FrameLayout>

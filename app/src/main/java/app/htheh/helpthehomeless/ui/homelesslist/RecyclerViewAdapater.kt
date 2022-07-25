@@ -1,12 +1,12 @@
 package app.htheh.helpthehomeless.ui.homelesslist
 
-import androidx.recyclerview.widget.RecyclerView
-import app.htheh.helpthehomeless.model.Homeless
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import app.htheh.helpthehomeless.databinding.HomelessItemViewBinding
+import app.htheh.helpthehomeless.model.Homeless
 
 
 //Using DiffUtil the adapters calculats the minimum changes when the list gets updated

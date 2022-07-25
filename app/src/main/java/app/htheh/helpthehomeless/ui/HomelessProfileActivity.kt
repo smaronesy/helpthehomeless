@@ -6,19 +6,13 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.navigation.ui.AppBarConfiguration
 import app.htheh.helpthehomeless.databinding.ActivityHomelessProfileBinding
 import app.htheh.helpthehomeless.model.Homeless
-import app.htheh.helpthehomeless.ui.homelesslist.HomelessListViewModel
-import app.htheh.helpthehomeless.utils.getEncodedAddress
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomelessProfileActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityHomelessProfileBinding
-//    val homelessViewModel: HomelessListViewModel by viewModel()
 
     companion object {
         private const val EXTRA_HomelessDataItem = "homeless"
@@ -33,18 +27,11 @@ class HomelessProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_homeless_profile)
+
         binding = ActivityHomelessProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val homeless = intent.extras?.get("homeless") as Homeless?
-
-//        val encodedAddress = getEncodedAddress(this.application, homeless!!)
-//        homelessViewModel.setWalkScore(homeless!!, encodedAddress)
-
-//        homelessViewModel.walkScore.observe(this, Observer {
-//            homeless.walkScore = it
-//        })
 
         binding.homeless = homeless
 

@@ -2,12 +2,12 @@ package app.htheh.helpthehomeless.api
 
 import app.htheh.helpthehomeless.utils.Constants
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
 /**
  * Build the Moshi object that Retrofit will be using, making sure to add the Kotlin adapter for

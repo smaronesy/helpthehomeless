@@ -2,7 +2,7 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/motionLayout">
+    android:id="@+id/motion_layout">
     <!-- TODO: Define a Transition -->
     <Transition
         app:constraintSetStart="@+id/start"
@@ -27,7 +27,7 @@
             app:layout_constraintVertical_bias="0.2" />
 
         <Constraint
-            android:id="@+id/contact_linearLayout"
+            android:id="@+id/contact_ll"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -39,7 +39,7 @@
             app:layout_constraintVertical_bias="0.35" />
 
         <Constraint
-            android:id="@+id/info_linearLayout"
+            android:id="@+id/info_ll"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -68,7 +68,7 @@
             app:layout_constraintVertical_bias="0.2" />
 
         <Constraint
-            android:id="@+id/contact_linearLayout"
+            android:id="@+id/contact_ll"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:alpha="1.0"
@@ -80,7 +80,7 @@
             app:layout_constraintVertical_bias="0.6" />
 
         <Constraint
-            android:id="@+id/info_linearLayout"
+            android:id="@+id/info_ll"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:alpha="1.0"

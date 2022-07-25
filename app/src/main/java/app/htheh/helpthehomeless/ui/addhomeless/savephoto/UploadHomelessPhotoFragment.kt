@@ -23,11 +23,11 @@ import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.ui.addhomeless.AddHomelessViewModel
 import app.htheh.helpthehomeless.ui.addhomeless.selectlocation.SelectHomelessLocationFragmentArgs
 import com.udacity.project4.locationreminders.savereminder.*
+import org.koin.android.ext.android.inject
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import org.koin.android.ext.android.inject
 
 
 private const val FILE_NAME = "homeless"
@@ -64,9 +64,21 @@ class UploadHomelessPhotoFragment : Fragment() {
 
         // Makes sure images are retrieved after configuration changes such as rotation
         if(savedInstanceState != null){
+            println("ROTATED")
             val homeless = savedInstanceState.getParcelable(KEY_HOMELESS) as Homeless?
-            addHomelessViewModel.photoURI.value = Uri.parse(homeless!!.imageUri)
+
+            //since Uri.parse does not like null we need to make sure imageUri is not null before parsing it
+            if(homeless!!.imageUri == null){
+                addHomelessViewModel.photoURI.value = null
+            } else {
+                addHomelessViewModel.photoURI.value = Uri.parse(homeless!!.imageUri)
+            }
+
             addHomelessViewModel.photoAbsolutePath.value = homeless!!.imagePath
+
+            println("ROTATED URI" + addHomelessViewModel.photoURI.value)
+            println("ROTATED PATH" + addHomelessViewModel.photoAbsolutePath.value)
+
         }
 
         // Inflate the layout for this fragment
@@ -91,12 +103,19 @@ class UploadHomelessPhotoFragment : Fragment() {
 
         if(addHomelessViewModel.photoAbsolutePath.value != null){
             val takenPhoto = BitmapFactory.decodeFile(addHomelessViewModel.photoAbsolutePath.value)
+
             binding.cameraImage.setImageBitmap(takenPhoto)
             binding.libraryImage.setImageResource(R.drawable.ic_photo_library_128)
+        } else {
+            binding.cameraImage.setImageResource(R.drawable.ic_photo_camera_128)
         }
+
         if(addHomelessViewModel.photoURI.value != null) {
+            println("ROTATED URI not Null")
             binding.libraryImage.setImageURI(addHomelessViewModel.photoURI.value)
             binding.cameraImage.setImageResource(R.drawable.ic_photo_camera_128)
+        } else {
+            binding.libraryImage.setImageResource(R.drawable.ic_photo_library_128)
         }
 
         return binding.root
@@ -105,7 +124,7 @@ class UploadHomelessPhotoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.saveProfile.setOnClickListener {
+        binding.nextToReview.setOnClickListener {
 
             //add imageUri and imagePath to homeLess object
             homeLess.imageUri = addHomelessViewModel.photoURI.value.toString()
@@ -121,24 +140,17 @@ class UploadHomelessPhotoFragment : Fragment() {
         val homeless = Homeless(
             homeLess.email!!, homeLess.firstName, homeLess.lastName,
             homeLess.phone, homeLess.needsHome, homeLess.approximateLocation,
-            homeLess.latitude, homeLess.longitude, homeLess.walkScore, addHomelessViewModel.photoURI.value.toString(),
+            homeLess.latitude, homeLess.longitude, homeLess.walkScore, null,
             addHomelessViewModel.photoAbsolutePath.value, homeLess.dateAdded
         )
+
+        if(addHomelessViewModel.photoURI.value != null){
+            homeless.imageUri = addHomelessViewModel.photoURI.value.toString()
+        }
+
         outState.putParcelable(KEY_HOMELESS, homeless)
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        if(addHomelessViewModel.photoAbsolutePath.value != null){
-//            val takenPhoto = BitmapFactory.decodeFile(addHomelessViewModel.photoAbsolutePath.value)
-//            binding.cameraImage.setImageBitmap(takenPhoto)
-//            binding.libraryImage.setImageResource(R.drawable.ic_photo_library_128)
-//        }
-//        if(addHomelessViewModel.photoURI.value != null) {
-//            binding.libraryImage.setImageURI(addHomelessViewModel.photoURI.value)
-//            binding.cameraImage.setImageResource(R.drawable.ic_photo_camera_128)
-//        }
-//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == CAM_PHOTO_REQUEST_CODE && resultCode == Activity.RESULT_OK){
@@ -168,15 +180,6 @@ class UploadHomelessPhotoFragment : Fragment() {
         startActivityForResult(intent, LIB_PHOTO_REQUEST_CODE)
     }
 
-    @Throws(IOException::class)
-    private fun createImageFile(fileName: String): File {
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val directoryStorage = this.requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile(fileName + "_" + timeStamp, ".jpg", directoryStorage)
-            .apply {
-                addHomelessViewModel.photoAbsolutePath.value = absolutePath
-            }
-    }
 
     private fun dispatchTakePictureIntent() {
         val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -185,6 +188,17 @@ class UploadHomelessPhotoFragment : Fragment() {
         val providerFile =
             FileProvider.getUriForFile(this.requireContext(),"app.htheh.helpthehomeless", filePhoto)
         takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, providerFile)
+//        addHomelessViewModel.photoURI.value = takePhotoIntent?.data
         startActivityForResult(takePhotoIntent, CAM_PHOTO_REQUEST_CODE)
+    }
+
+    @Throws(IOException::class)
+    private fun createImageFile(fileName: String): File {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val directoryStorage = this.requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(fileName + "_" + timeStamp, ".jpg", directoryStorage)
+            .apply {
+                addHomelessViewModel.photoAbsolutePath.value = absolutePath
+            }
     }
 }

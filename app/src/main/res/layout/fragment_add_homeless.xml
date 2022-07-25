@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="96dp"
             android:layout_marginTop="68dp"
-            android:text="Continue"
+            android:text="@string/next"
             android:textColor="@color/black"
             android:backgroundTint="#C4C4C6"
             app:layout_constraintStart_toStartOf="parent"

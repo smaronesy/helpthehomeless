@@ -47,4 +47,7 @@
     <string name="gep_permission_denied_explanation">Please grant background permissions to save geofence</string>
     <string name="permission_denied_explanation">You need to grant location permission in order to select the location.</string>
     <string name="logout">Logout</string>
+    <string name="menu_about">About</string>
+    <string name="next">Continue</string>
+    <string name="about_text">Help the Homeless is an app that informs users about the homeless living around their current location in case they feel charitable and want to make someone’s day. It is yet another tool in our fight against poverty. The app will rely on users to enter the information of the homeless in their area, or even better, if the homeless individual has a smartphone they can join themself. With this information other app users will know about the homeless person and either help them financially or even better hire them based on their education and work experience. The App will serve as the LinkedIn for the homeless.</string>
 </resources>
