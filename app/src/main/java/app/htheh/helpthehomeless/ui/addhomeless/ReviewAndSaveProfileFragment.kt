@@ -24,7 +24,6 @@ import app.htheh.helpthehomeless.geofence.GeofenceBroadcastReceiver
 import app.htheh.helpthehomeless.geofence.GeofencingConstants
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.ui.addhomeless.savephoto.UploadHomelessPhotoFragment
-import app.htheh.helpthehomeless.ui.addhomeless.savephoto.UploadHomelessPhotoFragmentArgs
 import app.htheh.helpthehomeless.utils.getEncodedAddress
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
@@ -34,18 +33,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.udacity.project4.locationreminders.savereminder.*
 import org.koin.android.ext.android.inject
 
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
-private const val REQUEST_CODE_DEVICE_LOCATION_SETTINGS = 27
 private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
 private const val REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE = 33
 private const val LOCATION_PERMISSION_INDEX = 1
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ReviewAndSaveProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ReviewAndSaveProfileFragment : Fragment() {
 
     val addHomelessViewModel: AddHomelessViewModel by inject()
@@ -80,9 +71,7 @@ class ReviewAndSaveProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-//        addHomelessViewModel = ViewModelProvider(this).get(AddHomelessViewModel::class.java)
-
-        homeLess = UploadHomelessPhotoFragmentArgs.fromBundle(arguments!!).homeless
+        homeLess = ReviewAndSaveProfileFragmentArgs.fromBundle(arguments!!).homeless
 
         // Inflate the layout for this fragment
         binding = FragmentReviewAndSaveProfileBinding.inflate(inflater, container, false)
@@ -193,7 +182,7 @@ class ReviewAndSaveProfileFragment : Fragment() {
         // 1) save the reminder to the local db
         val encodedAddress = getEncodedAddress(this.requireActivity().application, homeLess)
 
-        // TODO get walk score and save homeless to database
+        // get walk score and save homeless to database
         addHomelessViewModel.addHomeless(homeLess, encodedAddress)
 
     }

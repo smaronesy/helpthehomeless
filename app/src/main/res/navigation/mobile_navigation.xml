@@ -91,12 +91,4 @@
 
     </fragment>
 
-    <activity
-        android:id="@+id/nav_home_a"
-        android:name="app.htheh.helpthehomeless.ui.HomelessActivity"
-        android:label="Homeless List"
-        tools:layout="@layout/activity_homeless">
-
-    </activity>
-
 </navigation>

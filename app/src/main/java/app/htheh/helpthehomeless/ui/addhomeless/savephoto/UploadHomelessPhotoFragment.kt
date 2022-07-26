@@ -34,7 +34,8 @@ private const val FILE_NAME = "homeless"
 private const val CAM_PHOTO_REQUEST_CODE = 13
 private const val LIB_PHOTO_REQUEST_CODE = 1000;
 private const val PERMISSION_CODE = 1001;
-private const val KEY_HOMELESS = "homeless"
+private const val PATH = "path"
+private const val URI = "uri"
 
 /**
  * A simple [Fragment] subclass.
@@ -60,25 +61,22 @@ class UploadHomelessPhotoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        homeLess = SelectHomelessLocationFragmentArgs.fromBundle(arguments!!).homeless
+        homeLess = UploadHomelessPhotoFragmentArgs.fromBundle(arguments!!).homeless
 
         // Makes sure images are retrieved after configuration changes such as rotation
         if(savedInstanceState != null){
-            println("ROTATED")
-            val homeless = savedInstanceState.getParcelable(KEY_HOMELESS) as Homeless?
+
+            val path = savedInstanceState.getString(PATH)
+            val uri = savedInstanceState.getString(URI)
 
             //since Uri.parse does not like null we need to make sure imageUri is not null before parsing it
-            if(homeless!!.imageUri == null){
+            if(uri == null){
                 addHomelessViewModel.photoURI.value = null
             } else {
-                addHomelessViewModel.photoURI.value = Uri.parse(homeless!!.imageUri)
+                addHomelessViewModel.photoURI.value = Uri.parse(uri)
             }
 
-            addHomelessViewModel.photoAbsolutePath.value = homeless!!.imagePath
-
-            println("ROTATED URI" + addHomelessViewModel.photoURI.value)
-            println("ROTATED PATH" + addHomelessViewModel.photoAbsolutePath.value)
-
+            addHomelessViewModel.photoAbsolutePath.value = path
         }
 
         // Inflate the layout for this fragment
@@ -111,7 +109,6 @@ class UploadHomelessPhotoFragment : Fragment() {
         }
 
         if(addHomelessViewModel.photoURI.value != null) {
-            println("ROTATED URI not Null")
             binding.libraryImage.setImageURI(addHomelessViewModel.photoURI.value)
             binding.cameraImage.setImageResource(R.drawable.ic_photo_camera_128)
         } else {
@@ -137,18 +134,15 @@ class UploadHomelessPhotoFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        val homeless = Homeless(
-            homeLess.email!!, homeLess.firstName, homeLess.lastName,
-            homeLess.phone, homeLess.needsHome, homeLess.approximateLocation,
-            homeLess.latitude, homeLess.longitude, homeLess.walkScore, null,
-            addHomelessViewModel.photoAbsolutePath.value, homeLess.dateAdded
-        )
+
+        var imageUri: String? = null
 
         if(addHomelessViewModel.photoURI.value != null){
-            homeless.imageUri = addHomelessViewModel.photoURI.value.toString()
+            imageUri = addHomelessViewModel.photoURI.value.toString()
         }
 
-        outState.putParcelable(KEY_HOMELESS, homeless)
+        outState.putString(PATH, addHomelessViewModel.photoAbsolutePath.value)
+        outState.putString(URI, imageUri)
     }
 
 
