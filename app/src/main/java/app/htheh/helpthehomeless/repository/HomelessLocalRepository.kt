@@ -61,7 +61,7 @@ open class HomelessLocalRepository(
     suspend fun addHomeless(homeless: HomelessEntity, encodedAddress: String) {
         withContext(Dispatchers.IO) {
             try {
-                val response = WalkScoreApi.retrofitService.getProperties(Constants.API_KEY,
+                val response = WalkScoreApi.retrofitService.getProperties(Constants.WALK_SCORE_API_KEY,
                     homeless.latitude!!, homeless.longitude!!, encodedAddress, "json", 1, 1).awaitResponse()
                 val jsonBody = JSONObject(response.body())
                 homeless.walkScore =  parseWalkScoreJsonResult(jsonBody)
