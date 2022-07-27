@@ -137,11 +137,13 @@ class ReviewAndSaveProfileFragment : Fragment() {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
+        println("Permission code IS: " + PackageManager.PERMISSION_DENIED)
+        println("grantResults: " + grantResults[0])
         if (requestCode == REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE && grantResults.size > 0 ) {
             if (grantResults[LOCATION_PERMISSION_INDEX] == PackageManager.PERMISSION_GRANTED) {
                 checkDeviceLocationSettingsAndStartGeofence()
             }
-        } else if (grantResults.isEmpty() ||
+        } else if (grantResults.isEmpty() || grantResults.size < 2 ||
             grantResults[LOCATION_PERMISSION_INDEX] == PackageManager.PERMISSION_DENIED ||
             ((requestCode == REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
                     || requestCode == REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE) &&

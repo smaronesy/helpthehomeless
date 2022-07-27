@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import app.htheh.helpthehomeless.database.asDatabaseObject
 import app.htheh.helpthehomeless.model.Homeless
-import app.htheh.helpthehomeless.repository.Filter
-import app.htheh.helpthehomeless.repository.HomelessLocalRepository
+import app.htheh.helpthehomeless.datasource.repository.Filter
+import app.htheh.helpthehomeless.datasource.repository.HomelessLocalRepository
 import app.htheh.helpthehomeless.ui.HomelessViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -21,7 +21,6 @@ class HomelessListViewModel(application: Application, private val homelessLocalR
     }
 
     val homelesses = homelessLocalRepository.homelesses
-//    val walkScore = homelessLocalRepository.walkScore
 
     init {
         homelessLocalRepository.filter.value = Filter.SAVED
@@ -51,9 +50,4 @@ class HomelessListViewModel(application: Application, private val homelessLocalR
         _navigateToHomelessDetails.value = null
     }
 
-//    fun setWalkScore(hl: Homeless, encodedAddress: String){
-//        viewModelScope.launch {
-//            homelessLocalRepository.getWalkScore(hl, encodedAddress)
-//        }
-//    }
 }

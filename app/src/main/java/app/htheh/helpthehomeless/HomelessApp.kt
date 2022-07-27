@@ -2,7 +2,8 @@ package app.htheh.helpthehomeless
 
 import android.app.Application
 import app.htheh.helpthehomeless.database.HomelessDatabase
-import app.htheh.helpthehomeless.repository.HomelessLocalRepository
+import app.htheh.helpthehomeless.datasource.HomelessDataSource
+import app.htheh.helpthehomeless.datasource.repository.HomelessLocalRepository
 import app.htheh.helpthehomeless.ui.addhomeless.AddHomelessViewModel
 import app.htheh.helpthehomeless.ui.homelesslist.HomelessListViewModel
 import org.koin.android.ext.koin.androidContext

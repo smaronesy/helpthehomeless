@@ -43,7 +43,6 @@ class HomelessListFragment : Fragment() {
         binding.homelessRecycler.adapter = adapater
 
         homelessListViewModel.navigateToHomelessDetails.observe(viewLifecycleOwner, Observer {homeless -> homeless?.let {
-//            this.findNavController().navigate(HomelessListFragmentDirections.actionShowProfile(it))
             var profileIntent = Intent(this.requireActivity(), HomelessProfileActivity::class.java).apply {
                 putExtra("homeless", it)
             }

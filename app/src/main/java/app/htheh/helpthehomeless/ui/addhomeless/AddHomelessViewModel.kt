@@ -4,9 +4,12 @@ import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import app.htheh.helpthehomeless.database.HomelessEntity
+import app.htheh.helpthehomeless.database.Result
 import app.htheh.helpthehomeless.database.toHomelessEntity
+import app.htheh.helpthehomeless.datasource.HomelessDataSource
 import app.htheh.helpthehomeless.model.Homeless
-import app.htheh.helpthehomeless.repository.HomelessLocalRepository
+import app.htheh.helpthehomeless.datasource.repository.HomelessLocalRepository
 import app.htheh.helpthehomeless.ui.HomelessViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -38,6 +41,8 @@ class AddHomelessViewModel(application: Application, val homelessLocalRepository
 
     val geofencingItemSaved = MutableLiveData<Boolean>()
 
+    val homeless = MutableLiveData<HomelessEntity>()
+
     fun onClear() {
 
         homelessEmail.value = null
@@ -56,23 +61,20 @@ class AddHomelessViewModel(application: Application, val homelessLocalRepository
         selectedLocationStr.value = null
     }
 
-//    private val database = HomelessDatabase.getInstance(application)
-//    private val homelessLocalRepository = HomelessLocalRepository(application, database.homelessDao)
-
-//    val homeleesses = homelessLocalRepository.homelesses
-
-//    fun setWalkScore(hl: Homeless, encodedAddress: String){
-//        viewModelScope.launch {
-//            homelessLocalRepository.getWalkScore(hl, encodedAddress)
-//            walkScore.value = homelessLocalRepository.walkScore.value
-//        }
-//    }
-
     fun addHomeless(hl: Homeless, encodedAddress: String){
         viewModelScope.launch {
             homelessLocalRepository.addHomeless(hl.toHomelessEntity(), encodedAddress)
             geofencingItemSaved.value = true
             onClear()
+        }
+    }
+
+    fun getHomeless(email: String){
+        viewModelScope.launch {
+            val result = homelessLocalRepository.getHomelessByEmail(email)
+            if (result is Result.Success<HomelessEntity>) {
+                homeless.value = result.data
+            }
         }
     }
 

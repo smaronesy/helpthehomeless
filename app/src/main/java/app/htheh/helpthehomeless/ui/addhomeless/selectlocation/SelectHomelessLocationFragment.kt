@@ -23,6 +23,7 @@ import app.htheh.helpthehomeless.ui.addhomeless.AddHomelessViewModel
 import app.htheh.helpthehomeless.utils.setDisplayHomeAsUpEnabled
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -72,11 +73,13 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
+        println("onRequestPermissionsResult Triggered")
         if (requestCode == REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
             || requestCode == REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE) {
             if (grantResults.size > 0 &&
                 grantResults[LOCATION_PERMISSION_INDEX] == PackageManager.PERMISSION_GRANTED) {
                 addHomelessViewModel.fgLocationPermission.value = true
+                println("onRequestPermissionsResult in Triggered")
                 if(map != null){
                     getDeviceLocation()
                     map.isMyLocationEnabled = true
@@ -109,6 +112,7 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_DEVICE_LOCATION_SETTINGS) {
             // We don't rely on the result code, but just check the location setting again
+            println("onActivityResult Triggered")
             checkDeviceLocationSettings(false)
         }
     }
@@ -139,22 +143,24 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
         // Construct a FusedLocationProviderClient.
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.requireActivity())
 
-//        locationCallback = object : LocationCallback() {
-//            override fun onLocationResult(locationResult: LocationResult?) {
-//                locationResult ?: return
-//                for (location in locationResult.locations){
-//                    // Update UI with location data
-//                    lastKnownLocation = location
-//                }
-//            }
-//        }
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                locationResult ?: return
+
+                for (location in locationResult.locations){
+                    // Update UI with location data
+                    lastKnownLocation = location
+                    println("onLocationResult Triggered")
+                    getDeviceLocation()
+                }
+            }
+        }
 
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-        checkPermissions()
         checkDeviceLocationSettings()
     }
 
@@ -187,7 +193,7 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
 
         locationSettingsResponseTask.addOnCompleteListener {
             if ( it.isSuccessful ) {
-                getDeviceLocation()
+                checkPermissions()
                 Log.d(TAG, "Device Location Permission Granted")
             }
         }
@@ -227,7 +233,7 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
             } else {
                 map?.isMyLocationEnabled = false
                 map?.uiSettings?.isMyLocationButtonEnabled = false
-                requestForegroundLocationPermissions(this)
+//                requestForegroundLocationPermissions(this)
             }
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message, e)
@@ -248,8 +254,7 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
                         // Set the map's camera position to the current location of the device.
                         if (task.result != null) {
                             lastKnownLocation = task.result
-                            map?.moveCamera(
-                                CameraUpdateFactory.newLatLngZoom(
+                            map?.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                 LatLng(lastKnownLocation!!.latitude,
                                     lastKnownLocation!!.longitude), 15f))
                         } else {
@@ -258,8 +263,7 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
                     } else {
                         Log.d(TAG, "Current location is null. Using defaults.")
                         Log.e(TAG, "Exception: %s", task.exception)
-                        map?.moveCamera(
-                            CameraUpdateFactory
+                        map?.moveCamera(CameraUpdateFactory
                             .newLatLngZoom(LatLng(32.7, 117.2), 12f))
                         map?.uiSettings?.isMyLocationButtonEnabled = false
                     }

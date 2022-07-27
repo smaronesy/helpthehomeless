@@ -8,7 +8,7 @@ import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.database.HomelessEntity
 import app.htheh.helpthehomeless.database.Result.Success
 import app.htheh.helpthehomeless.model.Homeless
-import app.htheh.helpthehomeless.repository.HomelessLocalRepository
+import app.htheh.helpthehomeless.datasource.repository.HomelessLocalRepository
 import app.htheh.helpthehomeless.ui.addhomeless.savephoto.UploadHomelessPhotoFragment.Companion.ACTION_GEOFENCE_EVENT
 import app.htheh.helpthehomeless.utils.sendNotification
 import com.google.android.gms.location.Geofence

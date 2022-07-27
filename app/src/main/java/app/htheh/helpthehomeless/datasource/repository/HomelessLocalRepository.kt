@@ -1,4 +1,4 @@
-package app.htheh.helpthehomeless.repository
+package app.htheh.helpthehomeless.datasource.repository
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,6 +10,7 @@ import app.htheh.helpthehomeless.database.HomelessDao
 import app.htheh.helpthehomeless.database.HomelessEntity
 import app.htheh.helpthehomeless.database.Result
 import app.htheh.helpthehomeless.database.asDomainModel
+import app.htheh.helpthehomeless.datasource.HomelessDataSource
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.utils.Constants
 import app.htheh.helpthehomeless.utils.wrapEspressoIdlingResource
@@ -26,7 +27,7 @@ enum class Filter { SAVED, WEEK, TODAY}
 open class HomelessLocalRepository(
     private val homelessDao: HomelessDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) {
+): HomelessDataSource {
 
     val today = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault()).format(
         Calendar.getInstance().time)
@@ -52,13 +53,17 @@ open class HomelessLocalRepository(
             }
         }
 
-    suspend fun addHomelessList(hlList: List<HomelessEntity>) {
+    override suspend fun getHomelessList(): Result<List<HomelessEntity>> {
+        TODO("dadfd")
+    }
+
+    override suspend fun addHomelessList(hlList: List<HomelessEntity>) {
         withContext(Dispatchers.IO) {
             homelessDao.insertList(*hlList.toTypedArray())
         }
     }
 
-    suspend fun addHomeless(homeless: HomelessEntity, encodedAddress: String) {
+    override suspend fun addHomeless(homeless: HomelessEntity, encodedAddress: String) {
         withContext(Dispatchers.IO) {
             try {
                 val response = WalkScoreApi.retrofitService.getProperties(Constants.WALK_SCORE_API_KEY,
@@ -73,23 +78,7 @@ open class HomelessLocalRepository(
         }
     }
 
-//    suspend fun getWalkScore(homeless: Homeless, encodedAddress: String) {
-//        withContext(Dispatchers.IO) {
-//            try {
-//                val response = WalkScoreApi.retrofitService.getProperties(Constants.API_KEY,
-//                    homeless.latitude!!, homeless.longitude!!, encodedAddress, "json", 1, 1).awaitResponse()
-//                val jsonBody = JSONObject(response.body())
-//                walkScore.postValue(parseWalkScoreJsonResult(jsonBody))
-//                println("WALK SCORE IS " + jsonBody)
-//            } catch (ex: CancellationException) {
-//                throw ex // Must let the CancellationException propagate
-//            } catch (e: Exception) {
-//                Log.e("API CALL ERROR", e.message.toString())
-//            }
-//        }
-//    }
-
-    suspend fun getHomelessByEmail(email: String): Result<HomelessEntity> =
+    override suspend fun getHomelessByEmail(email: String): Result<HomelessEntity> =
         wrapEspressoIdlingResource {
             withContext(ioDispatcher) {
                 try {
@@ -105,8 +94,8 @@ open class HomelessLocalRepository(
             }
         }
 
-//    override suspend fun deleteAllReminders() {
-//        TODO("Not yet implemented")
-//    }
+    override suspend fun deleteHomelessByEmail(email: String) {
+        TODO("Not yet implemented")
+    }
 
 }
