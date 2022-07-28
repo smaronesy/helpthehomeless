@@ -81,7 +81,7 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
                 addHomelessViewModel.fgLocationPermission.value = true
                 println("onRequestPermissionsResult in Triggered")
                 if(map != null){
-                    getDeviceLocation()
+                    checkDeviceLocationSettings()
                     map.isMyLocationEnabled = true
                     map.uiSettings.isMyLocationButtonEnabled  = true
                 }
@@ -113,7 +113,7 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
         if (requestCode == REQUEST_CODE_DEVICE_LOCATION_SETTINGS) {
             // We don't rely on the result code, but just check the location setting again
             println("onActivityResult Triggered")
-            checkDeviceLocationSettings(false)
+            checkPermissions()
         }
     }
 
@@ -161,7 +161,7 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
 
     override fun onStart() {
         super.onStart()
-        checkDeviceLocationSettings()
+        checkPermissions()
     }
 
     /**
@@ -175,7 +175,7 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
 
         if (foregroundLocationPermissionApproved(this.requireContext())) {
             addHomelessViewModel.fgLocationPermission.value = true
-            getDeviceLocation()
+            checkDeviceLocationSettings()
         }
     }
 
@@ -193,7 +193,7 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
 
         locationSettingsResponseTask.addOnCompleteListener {
             if ( it.isSuccessful ) {
-                checkPermissions()
+                getDeviceLocation()
                 Log.d(TAG, "Device Location Permission Granted")
             }
         }
