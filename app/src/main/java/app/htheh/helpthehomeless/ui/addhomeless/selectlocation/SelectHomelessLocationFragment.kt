@@ -104,7 +104,6 @@ class SelectHomelessLocationFragment : Fragment(), OnMapReadyCallback {
                 })
             }.show()
         }
-
         addHomelessViewModel.fgLocationPermission.value = foregroundLocationPermissionApproved(this.requireContext())
     }
 
