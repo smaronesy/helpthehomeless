@@ -13,12 +13,22 @@
         android:layout_height="wrap_content"
         android:theme="@style/Theme.HelpTheHomeless.AppBarOverlay">
 
+        <View
+            android:background="#C9EBEF"
+            android:layout_width="match_parent"
+            android:layout_height="2dp" />
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#89BDD5"
             app:popupTheme="@style/Theme.HelpTheHomeless.PopupOverlay" />
+
+        <View
+            android:background="#A3A3A3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
