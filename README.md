@@ -1,5 +1,8 @@
 Help the Homeless (HH) Design Document
 
+This Design doc can be found at:
+https://docs.google.com/document/d/1DDqM4osVq9DwmzjZDU4T4o-QaTGO6dInIGO7a7dBSxY/edit#heading=h.d2vdwhod5qrg
+
 Project Description
 
 Help the Homeless is an app that informs users about the homeless living around their current location in case they feel charitable and want to make someone’s day. The app will rely on users to enter the information of the homeless in their area. With this information other app users will know about the homeless person and either help them financially or even better hire them based on their education and work experience. The App will serve as the LinkedIn for the homeless.
@@ -9,11 +12,17 @@ Similar Apps
 
 INSTRUCTIONS:
 
-Insert your Google maps API Key in the strings.xml file line 11:
-<string name="google_maps_key">"INSERT_YOUR_GOOGLE_MAPS_KEY_HERE"</string>
+REQUIRED API KEYS:
 
-Insert your walk score api key in Constants.kt line 7:
-const val WALK_SCORE_API_KEY = "INSERT_YOUR_WALK_SCORE_API_KEY_HERE"
+1) Insert your Google maps API Key in the strings.xml file line 11:
+   <string name="google_maps_key">"INSERT_YOUR_GOOGLE_MAPS_KEY_HERE"</string>
+   -For instruction on how to obtain a google maps API key please visit:
+   https://developers.google.com/maps/documentation/javascript/get-api-key
+
+2) Insert your walk score api key in Constants.kt line 7:
+   const val WALK_SCORE_API_KEY = "INSERT_YOUR_WALK_SCORE_API_KEY_HERE"
+   -To get a walk score API key please visit:
+   https://www.walkscore.com/professional/api-sign-up.php
 
 Based on my research I was not able to find any similar Apps.
 SW Development Process
