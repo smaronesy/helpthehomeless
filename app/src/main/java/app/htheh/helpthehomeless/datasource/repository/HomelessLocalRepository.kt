@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import app.htheh.helpthehomeless.api.WalkScoreApi
 import app.htheh.helpthehomeless.api.parseWalkScoreJsonResult
+import app.htheh.helpthehomeless.api.parseWalkScoreLogoUrl
 import app.htheh.helpthehomeless.database.HomelessDao
 import app.htheh.helpthehomeless.database.HomelessEntity
 import app.htheh.helpthehomeless.database.Result

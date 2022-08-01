@@ -2,12 +2,16 @@ package app.htheh.helpthehomeless.ui
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import app.htheh.helpthehomeless.databinding.ActivityHomelessProfileBinding
 import app.htheh.helpthehomeless.model.Homeless
+import com.squareup.picasso.Picasso
+import java.io.ByteArrayOutputStream
 
 
 class HomelessProfileActivity : AppCompatActivity() {
@@ -35,11 +39,21 @@ class HomelessProfileActivity : AppCompatActivity() {
 
         binding.homeless = homeless
 
+
         if(homeless?.imagePath != null){
             val takenPhoto = BitmapFactory.decodeFile(homeless.imagePath)
-            binding.profileImage.setImageBitmap(takenPhoto)
+            val imageUriFromBitmap = getImageUri(takenPhoto)
+            Picasso.get().load(imageUriFromBitmap).rotate(-90f).into(binding.profileImage)
         } else if(homeless?.imageUri != null) {
-            binding.profileImage.setImageURI(Uri.parse(homeless.imageUri))
+            Picasso.get().load(homeless?.imageUri).rotate(90f).into(binding.profileImage)
         }
+    }
+
+    fun getImageUri(inImage: Bitmap): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path =
+            MediaStore.Images.Media.insertImage(this.contentResolver, inImage, "Title", null)
+        return Uri.parse(path)
     }
 }
