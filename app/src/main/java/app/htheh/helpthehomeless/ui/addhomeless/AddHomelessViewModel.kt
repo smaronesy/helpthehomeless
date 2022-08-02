@@ -32,6 +32,7 @@ class AddHomelessViewModel(application: Application, val homelessLocalRepository
     val latitude = MutableLiveData<Double>()
     val longitude = MutableLiveData<Double>()
     val walkScore = MutableLiveData<Int>()
+    val wsLogoUrl = MutableLiveData<String>()
     val photoURI = MutableLiveData<Uri>()
     val photoAbsolutePath = MutableLiveData<String>()
     val dateAdded = MutableLiveData<String>()

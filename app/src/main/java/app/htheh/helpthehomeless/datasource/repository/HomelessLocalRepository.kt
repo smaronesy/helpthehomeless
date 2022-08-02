@@ -70,7 +70,8 @@ open class HomelessLocalRepository(
                 val response = WalkScoreApi.retrofitService.getProperties(Constants.WALK_SCORE_API_KEY,
                     homeless.latitude!!, homeless.longitude!!, encodedAddress, "json", 1, 1).awaitResponse()
                 val jsonBody = JSONObject(response.body())
-                homeless.walkScore =  parseWalkScoreJsonResult(jsonBody)
+                homeless.walkScore = parseWalkScoreJsonResult(jsonBody)
+                homeless.wsLogoUrl = parseWalkScoreLogoUrl(jsonBody)
                 println("WALK SCORE IS " + jsonBody)
             } catch (e: Exception) {
                 Log.e("API CALL ERROR", e.message.toString())

@@ -39,13 +39,14 @@ class HomelessProfileActivity : AppCompatActivity() {
 
         binding.homeless = homeless
 
+        Picasso.get().load(homeless?.wsLogoUrl).into(binding.walkScoreLogo)
 
         if(homeless?.imagePath != null){
             val takenPhoto = BitmapFactory.decodeFile(homeless.imagePath)
             val imageUriFromBitmap = getImageUri(takenPhoto)
-            Picasso.get().load(imageUriFromBitmap).rotate(-90f).into(binding.profileImage)
+            Picasso.get().load(imageUriFromBitmap).into(binding.profileImage)
         } else if(homeless?.imageUri != null) {
-            Picasso.get().load(homeless?.imageUri).rotate(90f).into(binding.profileImage)
+            Picasso.get().load(homeless?.imageUri).into(binding.profileImage)
         }
     }
 

@@ -34,8 +34,11 @@ data class HomelessEntity(
     @ColumnInfo(name="longitude")
     var longitude: Double?,
 
-    @ColumnInfo(name="walkScore")
+    @ColumnInfo(name="walk_score")
     var walkScore: Int?,
+
+    @ColumnInfo(name="ws_logo_url")
+    var wsLogoUrl: String?,
 
     @ColumnInfo(name="image_uri")
     var imageUri: String?,
@@ -62,6 +65,7 @@ fun HomelessEntity.toHomeless(): Homeless {
         latitude = latitude,
         longitude = longitude,
         walkScore= walkScore,
+        wsLogoUrl= wsLogoUrl,
         imageUri = imageUri,
         imagePath = imagePath,
         dateAdded = dateAdded
@@ -79,6 +83,7 @@ fun Homeless.toHomelessEntity(): HomelessEntity {
         latitude = latitude,
         longitude = longitude,
         walkScore= walkScore,
+        wsLogoUrl= wsLogoUrl,
         imageUri = imageUri,
         imagePath = imagePath,
         dateAdded = dateAdded
@@ -97,6 +102,7 @@ fun List<HomelessEntity>.asDomainModel(): List<Homeless> {
             latitude = it.latitude,
             longitude = it.longitude,
             walkScore= it.walkScore,
+            wsLogoUrl= it.wsLogoUrl,
             imageUri = it.imageUri,
             imagePath = it.imagePath,
             dateAdded = it.dateAdded
@@ -116,6 +122,7 @@ fun List<Homeless>.asDatabaseObject(): Array<HomelessEntity> {
             latitude = it.latitude,
             longitude = it.longitude,
             walkScore= it.walkScore,
+            wsLogoUrl= it.wsLogoUrl,
             imageUri = it.imageUri,
             imagePath = it.imagePath,
             dateAdded = it.dateAdded

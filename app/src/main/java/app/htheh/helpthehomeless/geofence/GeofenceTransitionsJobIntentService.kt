@@ -94,6 +94,7 @@ class GeofenceTransitionsJobIntentService : JobIntentService(), CoroutineScope {
                         homelessEntity.latitude,
                         homelessEntity.longitude,
                         homelessEntity.walkScore,
+                        homelessEntity.wsLogoUrl,
                         homelessEntity.imageUri,
                         homelessEntity.imagePath,
                         homelessEntity.dateAdded
