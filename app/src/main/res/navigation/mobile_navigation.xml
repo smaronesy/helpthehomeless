@@ -16,6 +16,18 @@
             app:destination="@+id/homelessProfileFragment" />
 
         <action
+            android:id="@+id/action_toDisclaimer"
+            app:destination="@+id/disclaimer" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/disclaimer"
+        android:name="app.htheh.helpthehomeless.ui.disclaimer.DisclaimerFragment"
+        android:label="Disclaimer"
+        tools:layout="@layout/fragment_disclaimer">
+
+        <action
             android:id="@+id/action_addHomeless"
             app:destination="@+id/addHomelessFragment" />
 
@@ -29,9 +41,11 @@
 
         <action
             android:id="@+id/action_selectLocation"
-            app:destination="@+id/selectLocationFragment" />v
+            app:destination="@+id/selectLocationFragment" />
 
     </fragment>
+
+
 
     <fragment
         android:id="@+id/selectLocationFragment"

@@ -78,7 +78,7 @@ class HomelessListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.hlAddFab.setOnClickListener{
-            this.findNavController().navigate(HomelessListFragmentDirections.actionAddHomeless())
+            this.findNavController().navigate(HomelessListFragmentDirections.actionToDisclaimer())
         }
     }
 
