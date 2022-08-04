@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "106000537848-nm0cphte6lr8mdn0e07lhbmlq0jc4kkb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.htheh.helpthehomeless",
+            "certificate_hash": "456315e52595f8f47dd25446c388184999c6a856"
+          }
+        },
+        {
           "client_id": "106000537848-vj0n0f3bum39m9psgfcfqf0fhg9lgoad.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

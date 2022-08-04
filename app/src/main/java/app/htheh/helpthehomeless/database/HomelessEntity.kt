@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import app.htheh.helpthehomeless.model.Homeless
 import java.util.*
+import kotlin.math.exp
 
 @Entity(tableName = "homeless_profile")
 data class HomelessEntity(
@@ -21,6 +22,18 @@ data class HomelessEntity(
 
     @ColumnInfo(name="phone")
     var phone: String?,
+
+    @ColumnInfo(name="short_bio")
+    var shortBio: String?,
+
+    @ColumnInfo(name="education_level")
+    var educationLevel: String?,
+
+    @ColumnInfo(name="years_of_exp")
+    var yearsOfExp: Int?,
+
+    @ColumnInfo(name="exp_description")
+    var expDescription: String?,
 
     @ColumnInfo(name="needs_home")
     var needsHome: Boolean?,
@@ -60,6 +73,10 @@ fun HomelessEntity.toHomeless(): Homeless {
         firstName = firstName,
         lastName = lastName,
         phone = phone,
+        shortBio = shortBio,
+        educationLevel = educationLevel,
+        yearsOfExp = yearsOfExp,
+        expDescription = expDescription,
         needsHome = needsHome,
         approximateLocation = approximateLocation,
         latitude = latitude,
@@ -78,6 +95,10 @@ fun Homeless.toHomelessEntity(): HomelessEntity {
         firstName = firstName,
         lastName = lastName,
         phone = phone,
+        shortBio = shortBio,
+        educationLevel = educationLevel,
+        yearsOfExp = yearsOfExp,
+        expDescription = expDescription,
         needsHome = needsHome,
         approximateLocation = approximateLocation,
         latitude = latitude,
@@ -97,6 +118,10 @@ fun List<HomelessEntity>.asDomainModel(): List<Homeless> {
             firstName = it.firstName,
             lastName = it.lastName,
             phone = it.phone,
+            shortBio = it.shortBio,
+            educationLevel = it.educationLevel,
+            yearsOfExp = it.yearsOfExp,
+            expDescription = it.expDescription,
             needsHome = it.needsHome,
             approximateLocation = it.approximateLocation,
             latitude = it.latitude,
@@ -117,6 +142,10 @@ fun List<Homeless>.asDatabaseObject(): Array<HomelessEntity> {
             firstName = it.firstName,
             lastName = it.lastName,
             phone = it.phone,
+            shortBio = it.shortBio,
+            educationLevel = it.educationLevel,
+            yearsOfExp = it.yearsOfExp,
+            expDescription = it.expDescription,
             needsHome = it.needsHome,
             approximateLocation = it.approximateLocation,
             latitude = it.latitude,
