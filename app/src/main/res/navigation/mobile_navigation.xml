@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/disclaimer"
-        android:name="app.htheh.helpthehomeless.ui.disclaimer.DisclaimerFragment"
+        android:name="app.htheh.helpthehomeless.ui.addhomeless.disclaimer.DisclaimerFragment"
         android:label="Disclaimer"
         tools:layout="@layout/fragment_disclaimer">
 
@@ -40,12 +40,58 @@
         tools:layout="@layout/fragment_add_homeless">
 
         <action
-            android:id="@+id/action_selectLocation"
-            app:destination="@+id/selectLocationFragment" />
+            android:id="@+id/action_toShortBio"
+            app:destination="@+id/shortBioFragment" />
 
     </fragment>
 
+    <fragment
+        android:id="@+id/shortBioFragment"
+        android:name="app.htheh.helpthehomeless.ui.addhomeless.shortbio.BioFragment"
+        android:label="Short Bio"
+        tools:layout="@layout/fragment_bio">
 
+        <action
+            android:id="@+id/action_toEducation"
+            app:destination="@+id/educationFragment"/>
+
+        <argument
+            android:name="homeless"
+            app:argType="app.htheh.helpthehomeless.model.Homeless"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/educationFragment"
+        android:name="app.htheh.helpthehomeless.ui.addhomeless.education.EducationFragment"
+        android:label="Education"
+        tools:layout="@layout/fragment_bio">
+
+        <action
+            android:id="@+id/action_toExperience"
+            app:destination="@+id/experienceFragment"/>
+
+        <argument
+            android:name="homeless"
+            app:argType="app.htheh.helpthehomeless.model.Homeless"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/experienceFragment"
+        android:name="app.htheh.helpthehomeless.ui.addhomeless.experience.ExperienceFragment"
+        android:label="Experience"
+        tools:layout="@layout/fragment_bio">
+
+        <action
+            android:id="@+id/action_selectLocation"
+            app:destination="@+id/selectLocationFragment"/>
+
+        <argument
+            android:name="homeless"
+            app:argType="app.htheh.helpthehomeless.model.Homeless"/>
+
+    </fragment>
 
     <fragment
         android:id="@+id/selectLocationFragment"

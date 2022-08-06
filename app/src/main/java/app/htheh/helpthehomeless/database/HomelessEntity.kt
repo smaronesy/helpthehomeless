@@ -30,7 +30,7 @@ data class HomelessEntity(
     var educationLevel: String?,
 
     @ColumnInfo(name="years_of_exp")
-    var yearsOfExp: Int?,
+    var yearsOfExp: String?,
 
     @ColumnInfo(name="exp_description")
     var expDescription: String?,

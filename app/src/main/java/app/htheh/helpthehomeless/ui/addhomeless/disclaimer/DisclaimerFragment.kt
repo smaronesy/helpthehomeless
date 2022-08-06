@@ -1,4 +1,4 @@
-package app.htheh.helpthehomeless.ui.disclaimer
+package app.htheh.helpthehomeless.ui.addhomeless.disclaimer
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.databinding.FragmentDisclaimerBinding
-import app.htheh.helpthehomeless.ui.homelesslist.HomelessListFragmentDirections
 
 /**
  * A simple [Fragment] subclass.

@@ -60,7 +60,7 @@ class AddHomelessFragment : Fragment() {
                 || binding.etLastName.text.isNullOrBlank() || binding.etPhone.text.isNullOrBlank()){
                 Toast.makeText(this.requireContext(), "Please complete all of the fields", Toast.LENGTH_SHORT).show()
             } else {
-                this.findNavController().navigate(AddHomelessFragmentDirections.actionSelectLocation(homeless))
+                this.findNavController().navigate(AddHomelessFragmentDirections.actionToShortBio(homeless))
             }
         }
     }

@@ -29,7 +29,7 @@ class AddHomelessViewModel(application: Application, val homelessLocalRepository
     val homelessPhone = MutableLiveData<String>()
     val shortBio = MutableLiveData<String>()
     val educationLevel = MutableLiveData<String>()
-    val yearsOfExp = MutableLiveData<Int>()
+    val yearsOfExp = MutableLiveData<String>()
     val expDescription = MutableLiveData<String>()
     val needsShelter = MutableLiveData<Boolean>()
     val approximateLocation = MutableLiveData<String>()
