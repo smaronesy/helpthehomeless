@@ -36,7 +36,6 @@ class EducationFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding = FragmentEducationBinding.inflate(inflater, container, false)
 
         homeLess = SelectHomelessLocationFragmentArgs.fromBundle(arguments!!).homeless
-        homeLess.educationLevel = addHomelessViewModel.educationLevel.value
 
         val spinner: Spinner = binding.educationLevelSpinner
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -55,6 +54,7 @@ class EducationFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         binding.nextToExperience.setOnClickListener {
             if(selected){
+                homeLess.educationLevel = addHomelessViewModel.educationLevel.value
                 this.findNavController().navigate(EducationFragmentDirections.actionToExperience(homeLess))
             } else {
                 Toast.makeText(this.requireContext(), "Please select an education level", Toast.LENGTH_SHORT).show()

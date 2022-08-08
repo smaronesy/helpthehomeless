@@ -60,7 +60,7 @@
         <item>Some College</item>
         <item>Bachelor\'s</item>
         <item>Master\'s</item>
-        <item>Phd</item>
+        <item>PhD</item>
     </string-array>
 
     <string-array name="experience_in_years">

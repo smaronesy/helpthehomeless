@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -7,56 +9,66 @@
             type="app.htheh.helpthehomeless.model.Homeless" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <ScrollView
+        android:id="@+id/review_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.addhomeless.shortbio.BioFragment">
+        android:fillViewport="true" >
 
-        <!-- TODO: Update blank fragment layout -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.addhomeless.shortbio.BioFragment">
 
-        <TextView
-            android:id="@+id/bio_text_view"
-            android:layout_width="@dimen/edit_text_input_width"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:text="Please provide a brief bio"
-            android:textSize="@dimen/text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <!-- TODO: Update blank fragment layout -->
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/bio_til"
-            android:layout_width="@dimen/edit_text_input_width"
-            android:layout_height="@dimen/edit_text_input_width"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/bio_text_view"
+                android:layout_width="@dimen/edit_text_input_width"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:text="Please provide a brief bio"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.516"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/bio_et"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="top|left" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/bio_til"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="@dimen/edit_text_input_width"
+                android:layout_height="@dimen/edit_text_input_width"
+                android:layout_marginTop="49dp"
+                android:hint="Bio"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bio_text_view"
+                app:layout_constraintVertical_bias="0.0">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bio_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top|left" />
 
-        <Button
-            android:id="@+id/next_to_education"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/statusbar_and_toolbar"
-            android:text="@string/next"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.85" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/next_to_education"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:backgroundTint="@color/statusbar_and_toolbar"
+                android:text="@string/next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bio_til"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

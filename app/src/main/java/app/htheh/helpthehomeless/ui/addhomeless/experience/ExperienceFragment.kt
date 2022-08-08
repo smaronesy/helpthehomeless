@@ -1,5 +1,6 @@
 package app.htheh.helpthehomeless.ui.addhomeless.experience
 
+import android.content.ClipData
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,8 +33,6 @@ class ExperienceFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding = FragmentExperienceBinding.inflate(inflater, container, false)
 
         homeLess = SelectHomelessLocationFragmentArgs.fromBundle(arguments!!).homeless
-        homeLess.yearsOfExp = addHomelessViewModel.yearsOfExp.value
-        homeLess.expDescription = addHomelessViewModel.expDescription.value
 
         val spinner: Spinner = binding.experienceSpinner
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -50,8 +49,12 @@ class ExperienceFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         spinner.onItemSelectedListener = this
 
+        addHomelessViewModel.expDescription.value = binding.expEt.text.toString()
+
         binding.nextToSelectLocation.setOnClickListener {
             if(selected){
+                homeLess.yearsOfExp = addHomelessViewModel.yearsOfExp.value
+                homeLess.expDescription = addHomelessViewModel.expDescription.value
                 this.findNavController().navigate(ExperienceFragmentDirections.actionSelectLocation(homeLess))
             } else {
                 Toast.makeText(this.requireContext(), "Please select years of experience", Toast.LENGTH_SHORT).show()

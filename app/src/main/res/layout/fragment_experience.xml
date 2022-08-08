@@ -1,67 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/review_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.addhomeless.experience.ExperienceFragment">
+    android:fillViewport="true" >
 
-    <Spinner
-        android:id="@+id/experience_spinner"
-        android:layout_width="@dimen/edit_text_input_width"
-        style="@style/spinner_style"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.166" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/exp_constraint_layou"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.addhomeless.experience.ExperienceFragment">
 
-    <TextView
-        android:id="@+id/exp_text_view"
-        android:layout_width="@dimen/edit_text_input_width"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size"
-        android:text="Details"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.278" />
+        <Spinner
+            android:id="@+id/experience_spinner"
+            style="@style/spinner_style"
+            android:layout_width="@dimen/edit_text_input_width"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.136" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/exp_til"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="@dimen/edit_text_input_width"
-        android:layout_height="300dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/exp_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="@dimen/edit_text_input_width"
+            android:layout_height="300dp"
+            android:layout_marginTop="85dp"
+            android:hint="Details"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/experience_spinner"
+            app:layout_constraintVertical_bias="0.0">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/exp_et"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="top|left" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/exp_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top|left" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/next_to_select_location"
-        android:layout_width="@dimen/button_width"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/statusbar_and_toolbar"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85" />
+        <Button
+            android:id="@+id/next_to_select_location"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:backgroundTint="@color/statusbar_and_toolbar"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/exp_til"
+            app:layout_constraintVertical_bias="0.100000024" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -53,6 +53,9 @@ data class HomelessEntity(
     @ColumnInfo(name="ws_logo_url")
     var wsLogoUrl: String?,
 
+    @ColumnInfo(name="firebase_image_uri")
+    var firebaseImageUri: String?,
+
     @ColumnInfo(name="image_uri")
     var imageUri: String?,
 
@@ -83,6 +86,7 @@ fun HomelessEntity.toHomeless(): Homeless {
         longitude = longitude,
         walkScore= walkScore,
         wsLogoUrl= wsLogoUrl,
+        firebaseImageUri = firebaseImageUri,
         imageUri = imageUri,
         imagePath = imagePath,
         dateAdded = dateAdded
@@ -105,6 +109,7 @@ fun Homeless.toHomelessEntity(): HomelessEntity {
         longitude = longitude,
         walkScore= walkScore,
         wsLogoUrl= wsLogoUrl,
+        firebaseImageUri = firebaseImageUri,
         imageUri = imageUri,
         imagePath = imagePath,
         dateAdded = dateAdded
@@ -128,6 +133,7 @@ fun List<HomelessEntity>.asDomainModel(): List<Homeless> {
             longitude = it.longitude,
             walkScore= it.walkScore,
             wsLogoUrl= it.wsLogoUrl,
+            firebaseImageUri = it.firebaseImageUri,
             imageUri = it.imageUri,
             imagePath = it.imagePath,
             dateAdded = it.dateAdded
@@ -152,6 +158,7 @@ fun List<Homeless>.asDatabaseObject(): Array<HomelessEntity> {
             longitude = it.longitude,
             walkScore= it.walkScore,
             wsLogoUrl= it.wsLogoUrl,
+            firebaseImageUri = it.firebaseImageUri,
             imageUri = it.imageUri,
             imagePath = it.imagePath,
             dateAdded = it.dateAdded

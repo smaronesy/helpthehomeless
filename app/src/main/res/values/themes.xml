@@ -32,7 +32,20 @@
         <item name="android:paddingRight">20dp</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
-        <item name="android:popupBackground">#DFFFFFFF</item>
+        <item name="android:dropDownListViewStyle">@style/spinner_popup_style</item>
+        <item name="android:dropDownVerticalOffset">32dp</item>
+        <item name="android:popupBackground">#E8F3FB</item>
+        <item name="android:spinnerItemStyle">@style/spinner_item_style</item>
+    </style>
+
+    <style name="spinner_popup_style" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:divider">#000000</item>
+        <item name="android:dividerHeight">5dp</item>
+    </style>
+
+    <style name="spinner_item_style">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
+        <item name="android:background">@drawable/spinner_border</item>
     </style>
 
 </resources>

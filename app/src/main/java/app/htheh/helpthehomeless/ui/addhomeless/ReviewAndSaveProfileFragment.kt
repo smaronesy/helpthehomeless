@@ -5,9 +5,11 @@ import android.app.PendingIntent
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -29,9 +31,17 @@ import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.udacity.project4.locationreminders.savereminder.*
 import org.koin.android.ext.android.inject
+import java.io.ByteArrayOutputStream
+
 
 private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
 private const val REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE = 33
@@ -42,6 +52,8 @@ class ReviewAndSaveProfileFragment : Fragment() {
     val addHomelessViewModel: AddHomelessViewModel by inject()
     private lateinit var binding: FragmentReviewAndSaveProfileBinding
     private lateinit var homeLess: Homeless
+    private lateinit var imageBitmap: Bitmap
+    private val myFirebaseStorage: FirebaseStorage = FirebaseStorage.getInstance()
 
     private lateinit var geofencingClient: GeofencingClient
 
@@ -87,6 +99,15 @@ class ReviewAndSaveProfileFragment : Fragment() {
 
         geofencingClient = LocationServices.getGeofencingClient(this.requireActivity())
 
+        // Checks to make sure we have a Firebase image download url before saving the object to db
+        addHomelessViewModel.firebaseImageUri.observe(viewLifecycleOwner, Observer {
+            if(it != null){
+                homeLess.firebaseImageUri = it
+                addHomelessToDB()
+            }
+        })
+
+        // Checks to see the object is added to db before adding geofence
         addHomelessViewModel.geofencingItemSaved.observe(viewLifecycleOwner, Observer {
             if(it){
                 addGeoFence()
@@ -173,20 +194,55 @@ class ReviewAndSaveProfileFragment : Fragment() {
 
         locationSettingsResponseTask.addOnCompleteListener {
             if ( it.isSuccessful ) {
-                addHomelessToDB()
+                addImageToFirebaseStorage()
+//                addHomelessToDB()
             }
         }
     }
 
     @SuppressLint("MissingPermission")
     fun addHomelessToDB() {
-
         // 1) save the reminder to the local db
         val encodedAddress = getEncodedAddress(this.requireActivity().application, homeLess)
 
         // get walk score and save homeless to database
         addHomelessViewModel.addHomeless(homeLess, encodedAddress)
+    }
 
+    fun addImageToFirebaseStorage() {
+        val path = "firebase/" + homeLess.id + ".png"
+        val firebaseImageRef = myFirebaseStorage.getReference(path)
+        val bytes = ByteArrayOutputStream()
+
+        if(homeLess.imagePath != null){
+            imageBitmap = BitmapFactory.decodeFile(homeLess.imagePath)
+        } else if (homeLess.imageUri != null) {
+            imageBitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, Uri.parse(homeLess.imageUri))
+        }
+
+        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, bytes)
+
+        val data = bytes.toByteArray()
+        val uploadTask = firebaseImageRef.putBytes(data)
+
+        uploadTask.addOnSuccessListener{
+            Toast.makeText(requireActivity().applicationContext, "image has been uploaded", Toast.LENGTH_SHORT).show()
+        }
+
+        val getDownloadUriTask = uploadTask.continueWithTask {
+            if(!it.isSuccessful){
+                println(it.exception)
+            }
+            firebaseImageRef.downloadUrl
+        }
+
+        getDownloadUriTask.addOnCompleteListener {
+            if(it.isSuccessful){
+                addHomelessViewModel.firebaseImageUri.value = it.result.toString()
+            } else {
+                println("Firebase Ex" + it.exception)
+            }
+        }
     }
 
     private fun addGeoFence() {

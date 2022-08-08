@@ -9,214 +9,222 @@
             type="app.htheh.helpthehomeless.model.Homeless" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:id="@+id/review_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.homelessprofile.HomelessProfileFragment">
+        android:fillViewport="true" >
 
-        <LinearLayout
-            android:id="@+id/image_ll"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            tools:context=".ui.homelessprofile.HomelessProfileFragment">
 
-            <TextView
-                android:id="@+id/tv_profile_image"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:text="Profile Photo"
-                android:textStyle="bold"
-                android:gravity="center_vertical"/>
-
-            <ImageView
-                android:id="@+id/iv_profile_image"
-                android:layout_width="wrap_content"
-                android:layout_height="150dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/first_name_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_ll"
-            app:layout_constraintVertical_bias="0.058">
-
-            <TextView
-                android:id="@+id/tvt_hl_first_name"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:text="First Name:"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/tv_hl_first_name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/image_ll"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="85dp"
-                android:text="@{homeless.firstName}"
+                android:layout_marginTop="60dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="Profile Photo"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"/>
+
+                <ImageView
+                    android:id="@+id/iv_profile_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/first_name_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_ll"
+                app:layout_constraintVertical_bias="0.058">
+
+                <TextView
+                    android:id="@+id/tvt_hl_first_name"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="First Name:"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_hl_first_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="85dp"
+                    android:text="@{homeless.firstName}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.128"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.306" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/last_name_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/first_name_ll"
+                app:layout_constraintVertical_bias="0.056">
+
+                <TextView
+                    android:id="@+id/tvt_last_name"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="Last Name:"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/hl_last_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="85dp"
+                    android:text="@{homeless.lastName}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.128"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.4" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/email2_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/last_name_ll"
+                app:layout_constraintVertical_bias="0.045">
+
+                <TextView
+                    android:id="@+id/tvt_email"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="Email:"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/hl_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="85dp"
+                    android:text="@{homeless.email}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.128"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.49" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/phone2_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/email2_ll"
+                app:layout_constraintVertical_bias="0.058">
+
+                <TextView
+                    android:id="@+id/tvt_phone"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="Phone:"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/hl_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="85dp"
+                    android:text="@{homeless.phone}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.128"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.58" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone2_ll"
+                app:layout_constraintVertical_bias="0.059">
+
+                <TextView
+                    android:id="@+id/tvt_hl_status"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="Needs Shelter:"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/hl_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="85dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.128"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.668"
+                    app:statusText="@{homeless.needsHome}" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/save_profile"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/statusbar_and_toolbar"
+                android:text="SAVE PROFILE"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.128"
+                app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.306" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/last_name_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/first_name_ll"
-            app:layout_constraintVertical_bias="0.056">
-
-            <TextView
-                android:id="@+id/tvt_last_name"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:text="Last Name:"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/hl_last_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="85dp"
-                android:text="@{homeless.lastName}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.128"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.4" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/email2_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/last_name_ll"
-            app:layout_constraintVertical_bias="0.045">
-
-            <TextView
-                android:id="@+id/tvt_email"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:text="Email:"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/hl_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="85dp"
-                android:text="@{homeless.email}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.128"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.49" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/phone2_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/email2_ll"
-            app:layout_constraintVertical_bias="0.058">
-
-            <TextView
-                android:id="@+id/tvt_phone"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:text="Phone:"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/hl_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="85dp"
-                android:text="@{homeless.phone}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.128"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.58" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phone2_ll"
-            app:layout_constraintVertical_bias="0.059">
-
-            <TextView
-                android:id="@+id/tvt_hl_status"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:text="Needs Shelter:"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/hl_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="85dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.128"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.668"
-                app:statusText="@{homeless.needsHome}" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/save_profile"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/statusbar_and_toolbar"
-            android:text="SAVE PROFILE"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.85" />
+                app:layout_constraintTop_toBottomOf="@+id/ll_status"
+                app:layout_constraintVertical_bias="0.661" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </layout>

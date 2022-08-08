@@ -52,7 +52,8 @@ class AddHomelessFragment : Fragment() {
                 addHomelessViewModel.yearsOfExp.value, addHomelessViewModel.expDescription.value,
                 addHomelessViewModel.needsShelter.value, addHomelessViewModel.approximateLocation.value,
                 addHomelessViewModel.latitude.value, addHomelessViewModel.longitude.value,
-                addHomelessViewModel.walkScore.value, addHomelessViewModel.wsLogoUrl.value, addHomelessViewModel.photoURI.value.toString(),
+                addHomelessViewModel.walkScore.value, addHomelessViewModel.wsLogoUrl.value,
+                addHomelessViewModel.firebaseImageUri.value, addHomelessViewModel.photoURI.value.toString(),
                 addHomelessViewModel.photoAbsolutePath.value, addHomelessViewModel.dateAdded.value
             )
 
