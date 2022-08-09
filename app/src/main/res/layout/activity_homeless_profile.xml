@@ -15,18 +15,22 @@
         android:layout_height="match_parent"
         android:fillViewport="true" >
 
-        <androidx.constraintlayout.motion.widget.MotionLayout
-            android:id="@+id/motion_layout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profile_constraint_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutDescription="@xml/main_scene">
+            android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/image_card_out"
                 android:layout_width="155dp"
                 android:layout_height="155dp"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="250dp">
+                app:cardCornerRadius="250dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.13999999">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/image_card_inner"
@@ -52,48 +56,93 @@
                 android:text="@{homeless.firstName + ' ' + homeless.lastName}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_large"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textAlignment="viewStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_card_out"
+                app:layout_constraintVertical_bias="0.05" />
 
-            <TextView
+                        <TextView
                 android:id="@+id/title_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textAlignment="viewStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hl_name"
+                app:layout_constraintVertical_bias="0.15" />
 
             <TextView
                 android:id="@+id/hl_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{homeless.email}" />
+                android:text="@{homeless.email}"
+                android:textAlignment="viewStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/title_email"
+                app:layout_constraintTop_toBottomOf="@+id/hl_name"
+                app:layout_constraintVertical_bias="0.15" />
 
             <TextView
                 android:id="@+id/title_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phone"
+                android:textAlignment="viewStart"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_email"
+                app:layout_constraintVertical_bias="0.091" />
 
             <TextView
                 android:id="@+id/hl_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{homeless.phone}" />
+                android:text="@{homeless.phone}"
+                android:textAlignment="viewStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/title_phone"
+                app:layout_constraintTop_toBottomOf="@+id/hl_email"
+                app:layout_constraintVertical_bias="0.110000014" />
 
             <TextView
                 android:id="@+id/title_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Status"
+                android:textAlignment="viewStart"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_phone"
+                app:layout_constraintVertical_bias="0.095" />
 
             <TextView
                 android:id="@+id/hl_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAlignment="viewStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/title_status"
+                app:layout_constraintTop_toBottomOf="@+id/hl_phone"
+                app:layout_constraintVertical_bias="0.13999999"
                 app:statusText="@{homeless.needsHome}" />
 
             <TextView
@@ -101,49 +150,94 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Walk Score"
+                android:textAlignment="viewStart"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.174"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_status"
+                app:layout_constraintVertical_bias="0.138" />
 
             <TextView
                 android:id="@+id/hl_walk_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{homeless.walkScore.toString()}" />
+                android:text="@{homeless.walkScore.toString()}"
+                android:textAlignment="viewStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/title_walk_score"
+                app:layout_constraintTop_toBottomOf="@+id/hl_status"
+                app:layout_constraintVertical_bias="0.13999999" />
 
             <ImageView
                 android:id="@+id/walk_score_logo"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toEndOf="@+id/hl_walk_score"
+                app:layout_constraintTop_toBottomOf="@+id/hl_status"
+                app:layout_constraintVertical_bias="0.07999998" />
 
             <TextView
                 android:id="@+id/education_level_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Education"
+                android:textAlignment="viewStart"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.165"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_walk_score"
+                app:layout_constraintVertical_bias="0.16000003" />
 
             <TextView
                 android:id="@+id/education_level_answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{homeless.educationLevel.toString()}" />
+                android:text="@{homeless.educationLevel.toString()}"
+                android:textAlignment="viewStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/education_level_title"
+                app:layout_constraintTop_toBottomOf="@+id/hl_walk_score"
+                app:layout_constraintVertical_bias="0.19999999" />
 
             <TextView
                 android:id="@+id/years_experience_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Experience"
+                android:textAlignment="viewStart"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.167"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/education_level_title"
+                app:layout_constraintVertical_bias="0.19999999" />
 
             <TextView
                 android:id="@+id/years_experience_answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{homeless.yearsOfExp.toString()}" />
+                android:text="@{homeless.yearsOfExp.toString()}"
+                android:textAlignment="viewStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/years_experience_title"
+                app:layout_constraintTop_toBottomOf="@+id/education_level_answer"
+                app:layout_constraintVertical_bias="0.24000001" />
 
-        </androidx.constraintlayout.motion.widget.MotionLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 

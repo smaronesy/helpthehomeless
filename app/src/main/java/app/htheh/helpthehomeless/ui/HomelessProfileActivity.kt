@@ -49,7 +49,7 @@ class HomelessProfileActivity : AppCompatActivity() {
 //            // Handle any errors
 //        }
 
-        Picasso.get().load(homeless?.wsLogoUrl).into(binding.walkScoreLogo)
+//        Picasso.get().load(homeless?.wsLogoUrl).into(binding.walkScoreLl)
         Picasso.get().load(Uri.parse(homeless?.firebaseImageUri)).fit().centerInside()
             .rotate(90F)                    //if you want to rotate by 90 degrees
             .error(R.drawable.ic_no_internet)

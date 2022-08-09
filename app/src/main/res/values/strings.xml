@@ -6,7 +6,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="nav_header_title">Help The Homeless</string>
     <string name="nav_header_subtitle">htheh.app</string>
-    <string name="welcome_to_help_the_homeless">Welcome to Help the Homeless App</string>
+    <string name="welcome_to_help_the_homeless">Welcome to Help the Homeless</string>
     <string name="to_login">Press to login</string>
     <string name="google_maps_key">AIzaSyBGJvJ1gVDVbZ9DyUiJJhsXiBIp6H3lYcw</string>
     <string name="title_activity_register">RegisterActivity</string>

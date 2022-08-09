@@ -16,30 +16,32 @@
         android:fillViewport="true" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bio_constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/constraint_layout_margin"
             tools:context=".ui.addhomeless.shortbio.BioFragment">
 
             <!-- TODO: Update blank fragment layout -->
 
             <TextView
                 android:id="@+id/bio_text_view"
-                android:layout_width="@dimen/edit_text_input_width"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:text="Please provide a brief bio"
                 android:textSize="@dimen/text_size"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.516"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.15" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/bio_til"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="@dimen/edit_text_input_width"
-                android:layout_height="@dimen/edit_text_input_width"
-                android:layout_marginTop="49dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_input_height"
+                android:layout_marginTop="55dp"
                 android:hint="Bio"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +69,7 @@
                 app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bio_til"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

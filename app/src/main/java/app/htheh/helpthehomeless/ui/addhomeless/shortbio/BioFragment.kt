@@ -31,6 +31,8 @@ class BioFragment : Fragment() {
 
         homeLess.shortBio  = addHomelessViewModel.shortBio.value
 
+        binding.bioTextView.text = "Please provide a brief bio for " + homeLess.firstName
+
         binding.nextToEducation.setOnClickListener{
             this.findNavController().navigate(BioFragmentDirections.actionToEducation(homeLess))
         }

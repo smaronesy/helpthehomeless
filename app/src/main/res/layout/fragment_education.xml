@@ -10,28 +10,29 @@
     android:fillViewport="true" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/exp_constraint_layou"
+        android:id="@+id/exp_constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/constraint_layout_margin"
         tools:context=".ui.addhomeless.education.EducationFragment">
 
         <Spinner
             android:id="@+id/education_level_spinner"
             style="@style/spinner_style"
-            android:layout_width="@dimen/edit_text_input_width"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.136" />
+            app:layout_constraintVertical_bias="0.15" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ed_til"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="@dimen/edit_text_input_width"
-            android:layout_height="300dp"
-            android:layout_marginTop="85dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_input_height"
+            android:layout_marginTop="50dp"
             android:hint="Details"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +60,7 @@
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ed_til"
-            app:layout_constraintVertical_bias="0.100000024" />
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

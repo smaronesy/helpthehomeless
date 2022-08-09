@@ -16,8 +16,10 @@
         android:fillViewport="true" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/review_constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/constraint_layout_margin"
             tools:context=".ui.homelessprofile.HomelessProfileFragment">
 
             <LinearLayout
@@ -220,7 +222,7 @@
                 app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll_status"
-                app:layout_constraintVertical_bias="0.661" />
+                app:layout_constraintVertical_bias="1.0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
