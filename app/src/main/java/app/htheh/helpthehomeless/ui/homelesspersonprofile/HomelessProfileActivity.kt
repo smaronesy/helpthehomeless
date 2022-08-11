@@ -1,23 +1,26 @@
-package app.htheh.helpthehomeless.ui
+package app.htheh.helpthehomeless.ui.homelesspersonprofile
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.databinding.ActivityHomelessProfileBinding
 import app.htheh.helpthehomeless.model.Homeless
+import app.htheh.helpthehomeless.ui.AuthenticationActivity
+import app.htheh.helpthehomeless.ui.HomelessActivity
+import app.htheh.helpthehomeless.ui.addhomeless.AddHomelessViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
-import java.io.ByteArrayOutputStream
+import org.koin.android.ext.android.inject
 
 
 class HomelessProfileActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityHomelessProfileBinding
+    val homelessProfileViewModel: HomelessProfileViewModel by inject()
 
     companion object {
         private const val EXTRA_HomelessDataItem = "homeless"
@@ -40,20 +43,19 @@ class HomelessProfileActivity : AppCompatActivity() {
 
         binding.homeless = homeless
 
-//        Use to get firebaseUri here
-//        val storageRef = myFirebaseStorage.reference
-//        storageRef.child(path).downloadUrl.addOnSuccessListener {
-//            // Got the download URL for path
-//            addHomelessViewModel.firebaseImageUri.value = it.toString()
-//        }.addOnFailureListener {
-//            // Handle any errors
-//        }
-
+        // loading the profile image and walk score logo
 //        Picasso.get().load(homeless?.wsLogoUrl).into(binding.walkScoreLl)
         Picasso.get().load(Uri.parse(homeless?.firebaseImageUri)).fit().centerInside()
-            .rotate(90F)                    //if you want to rotate by 90 degrees
             .error(R.drawable.ic_no_internet)
             .placeholder(R.drawable.ic_photo_library_128).into(binding.profileImage)
+
+        binding.profileDeleteBtn.isVisible = homeless?.loggedInUser == FirebaseAuth.getInstance().currentUser?.email
+
+        binding.profileDeleteBtn.setOnClickListener {
+            homelessProfileViewModel.removeHomelessPersonToFirebaseDb(homeless!!)
+            val intentToHome = Intent(this, HomelessActivity::class.java)
+            startActivity(intentToHome)
+        }
 
     }
 }

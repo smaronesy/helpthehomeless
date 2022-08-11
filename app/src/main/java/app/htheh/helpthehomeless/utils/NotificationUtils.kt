@@ -10,7 +10,7 @@ import androidx.core.app.TaskStackBuilder
 import app.htheh.helpthehomeless.BuildConfig
 import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.model.Homeless
-import app.htheh.helpthehomeless.ui.HomelessProfileActivity
+import app.htheh.helpthehomeless.ui.homelesspersonprofile.HomelessProfileActivity
 import app.htheh.helpthehomeless.ui.addhomeless.ReviewAndSaveProfileFragment
 
 private const val NOTIFICATION_CHANNEL_ID = BuildConfig.APPLICATION_ID + ".channel"

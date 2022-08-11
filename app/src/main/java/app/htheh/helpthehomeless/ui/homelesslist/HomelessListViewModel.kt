@@ -6,35 +6,46 @@ import androidx.lifecycle.viewModelScope
 import app.htheh.helpthehomeless.database.asDatabaseObject
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.datasource.repository.Filter
-import app.htheh.helpthehomeless.datasource.repository.HomelessLocalRepository
+import app.htheh.helpthehomeless.datasource.repository.HomelessRemoteRepository
 import app.htheh.helpthehomeless.ui.HomelessViewModel
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class HomelessListViewModel(application: Application, private val homelessLocalRepository: HomelessLocalRepository) : HomelessViewModel(application) {
+class HomelessListViewModel(application: Application, private val homelessRemoteRepository: HomelessRemoteRepository) : HomelessViewModel(application) {
 
     private var viewModelJob = Job()
+    var database: DatabaseReference
 
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
     }
 
-    val homelesses = homelessLocalRepository.homelesses
+//    val homelesses = homelessLocalRepository.homelesses
+
+    var homelessIndividuals = homelessRemoteRepository.homelessIndividuals
 
     init {
-        homelessLocalRepository.filter.value = Filter.SAVED
+        homelessRemoteRepository.filter.value = Filter.SAVED
+        database = Firebase.database.reference
+    }
+
+    fun initializeListeningToFirebaseDB(){
+        homelessRemoteRepository.initializeListeningToFirebaseDB()
     }
 
     fun updateHomelessWithFilter(filter: Filter) {
         println("FILTER IS " + filter)
-        homelessLocalRepository.filter.value = filter
-        println("_filter IS " + homelessLocalRepository.filter.value)
+        homelessRemoteRepository.filter.value = filter
+        println("_filter IS " + homelessRemoteRepository.filter.value)
     }
 
     fun addListOfHomelesses(hlList: List<Homeless>){
         viewModelScope.launch {
-            homelessLocalRepository.addHomelessList(hlList.asDatabaseObject().toList())
+            homelessRemoteRepository.addHomelessList(hlList.asDatabaseObject().toList())
         }
     }
 

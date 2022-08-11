@@ -14,6 +14,9 @@ data class HomelessEntity(
     @ColumnInfo(name="email")
     var email: String = "",
 
+    @ColumnInfo(name="logged_in_user")
+    var loggedInUser: String?,
+
     @ColumnInfo(name="first_name")
     var firstName: String?,
 
@@ -73,6 +76,7 @@ data class HomelessEntity(
 fun HomelessEntity.toHomeless(): Homeless {
     return Homeless(
         email = email,
+        loggedInUser = loggedInUser,
         firstName = firstName,
         lastName = lastName,
         phone = phone,
@@ -96,6 +100,7 @@ fun HomelessEntity.toHomeless(): Homeless {
 fun Homeless.toHomelessEntity(): HomelessEntity {
     return HomelessEntity(
         email = email,
+        loggedInUser = loggedInUser,
         firstName = firstName,
         lastName = lastName,
         phone = phone,
@@ -120,6 +125,7 @@ fun List<HomelessEntity>.asDomainModel(): List<Homeless> {
     return map {
         Homeless(
             email = it.email,
+            loggedInUser = it.loggedInUser,
             firstName = it.firstName,
             lastName = it.lastName,
             phone = it.phone,
@@ -145,6 +151,7 @@ fun List<Homeless>.asDatabaseObject(): Array<HomelessEntity> {
     return map {
         HomelessEntity(
             email = it.email,
+            loggedInUser = it.loggedInUser,
             firstName = it.firstName,
             lastName = it.lastName,
             phone = it.phone,

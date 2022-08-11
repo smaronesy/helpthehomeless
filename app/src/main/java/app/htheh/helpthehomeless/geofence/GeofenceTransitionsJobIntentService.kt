@@ -8,7 +8,7 @@ import app.htheh.helpthehomeless.R
 import app.htheh.helpthehomeless.database.HomelessEntity
 import app.htheh.helpthehomeless.database.Result.Success
 import app.htheh.helpthehomeless.model.Homeless
-import app.htheh.helpthehomeless.datasource.repository.HomelessLocalRepository
+import app.htheh.helpthehomeless.datasource.repository.HomelessRemoteRepository
 import app.htheh.helpthehomeless.ui.addhomeless.savephoto.UploadHomelessPhotoFragment.Companion.ACTION_GEOFENCE_EVENT
 import app.htheh.helpthehomeless.utils.sendNotification
 import com.google.android.gms.location.Geofence
@@ -72,12 +72,12 @@ class GeofenceTransitionsJobIntentService : JobIntentService(), CoroutineScope {
         val requestId = triggeringGeofence.requestId
 
         //Get the local repository instance
-        val homelessLocalRepository: HomelessLocalRepository by inject()
+        val homelessRemoteRepository: HomelessRemoteRepository by inject()
 //        Interaction to the repository has to be through a coroutine scope
         CoroutineScope(coroutineContext).launch(SupervisorJob()) {
             //get the homeless with the request id (email)
             println("Result BEING PRITNED: " + requestId)
-            val result = homelessLocalRepository.getHomelessByEmail(requestId)
+            val result = homelessRemoteRepository.getHomelessByEmail(requestId)
             println("EMAIL BEING PRITNED: " + result)
             if (result is Success<HomelessEntity>) {
                 val homelessEntity = result.data
@@ -86,6 +86,7 @@ class GeofenceTransitionsJobIntentService : JobIntentService(), CoroutineScope {
                 sendNotification(
                     this@GeofenceTransitionsJobIntentService, Homeless(
                         homelessEntity.email,
+                        homelessEntity.loggedInUser,
                         homelessEntity.firstName,
                         homelessEntity.lastName,
                         homelessEntity.phone,
@@ -97,7 +98,7 @@ class GeofenceTransitionsJobIntentService : JobIntentService(), CoroutineScope {
                         homelessEntity.approximateLocation,
                         homelessEntity.latitude,
                         homelessEntity.longitude,
-                        homelessEntity.walkScore,
+                        homelessEntity.walkScore?.toInt(),
                         homelessEntity.wsLogoUrl,
                         homelessEntity.firebaseImageUri,
                         homelessEntity.imageUri,

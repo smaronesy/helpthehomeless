@@ -7,14 +7,16 @@ import androidx.lifecycle.viewModelScope
 import app.htheh.helpthehomeless.database.HomelessEntity
 import app.htheh.helpthehomeless.database.Result
 import app.htheh.helpthehomeless.database.toHomelessEntity
-import app.htheh.helpthehomeless.datasource.HomelessDataSource
 import app.htheh.helpthehomeless.model.Homeless
-import app.htheh.helpthehomeless.datasource.repository.HomelessLocalRepository
+import app.htheh.helpthehomeless.datasource.repository.HomelessRemoteRepository
 import app.htheh.helpthehomeless.ui.HomelessViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class AddHomelessViewModel(application: Application, val homelessLocalRepository: HomelessLocalRepository) : HomelessViewModel(application) {
+class AddHomelessViewModel(
+    application: Application,
+    val homelessRemoteRepository: HomelessRemoteRepository
+    ) : HomelessViewModel(application) {
 
     private var viewModelJob = Job()
 
@@ -24,6 +26,7 @@ class AddHomelessViewModel(application: Application, val homelessLocalRepository
     }
 
     val homelessEmail = MutableLiveData<String>()
+    val loggedInUser = MutableLiveData<String>()
     val homelessFirstName = MutableLiveData<String>()
     val homelessLastName = MutableLiveData<String>()
     val homelessPhone = MutableLiveData<String>()
@@ -68,9 +71,17 @@ class AddHomelessViewModel(application: Application, val homelessLocalRepository
         selectedLocationStr.value = null
     }
 
+    fun addHomelessPersonToFirebaseDb(homeless: Homeless, encodedAddress: String) {
+        viewModelScope.launch {
+            homelessRemoteRepository.addHomelessPersonToFirebaseDb(homeless, encodedAddress)
+            geofencingItemSaved.value = true
+            onClear()
+        }
+    }
+
     fun addHomeless(hl: Homeless, encodedAddress: String){
         viewModelScope.launch {
-            homelessLocalRepository.addHomeless(hl.toHomelessEntity(), encodedAddress)
+            homelessRemoteRepository.addHomeless(hl.toHomelessEntity(), encodedAddress)
             geofencingItemSaved.value = true
             onClear()
         }
@@ -78,7 +89,7 @@ class AddHomelessViewModel(application: Application, val homelessLocalRepository
 
     fun getHomeless(email: String){
         viewModelScope.launch {
-            val result = homelessLocalRepository.getHomelessByEmail(email)
+            val result = homelessRemoteRepository.getHomelessByEmail(email)
             if (result is Result.Success<HomelessEntity>) {
                 homeless.value = result.data
             }

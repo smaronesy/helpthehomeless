@@ -11,17 +11,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.htheh.helpthehomeless.databinding.FragmentHomelessListBinding
-import app.htheh.helpthehomeless.ui.HomelessProfileActivity
+import app.htheh.helpthehomeless.ui.homelesspersonprofile.HomelessProfileActivity
+import com.google.firebase.database.DatabaseReference
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomelessListFragment : Fragment() {
 
+    private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var database: DatabaseReference
+
     private var _binding: FragmentHomelessListBinding? = null
-
-    lateinit var layoutManager: LinearLayoutManager
-
-    val homelessListViewModel: HomelessListViewModel by viewModel()
+    private val homelessListViewModel: HomelessListViewModel by viewModel()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -67,7 +68,9 @@ class HomelessListFragment : Fragment() {
             homelessListViewModel.onHomelessDetailNavigated()
         }})
 
-        homelessListViewModel.homelesses.observe(viewLifecycleOwner, Observer {
+        homelessListViewModel.initializeListeningToFirebaseDB()
+
+        homelessListViewModel.homelessIndividuals.observe(viewLifecycleOwner, Observer {
             adapater.submitList(it)
         })
 

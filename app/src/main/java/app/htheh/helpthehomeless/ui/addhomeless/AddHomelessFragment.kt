@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import app.htheh.helpthehomeless.databinding.FragmentAddHomelessBinding
 import app.htheh.helpthehomeless.model.Homeless
 import app.htheh.helpthehomeless.utils.Constants
+import com.google.firebase.auth.FirebaseAuth
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -27,6 +28,8 @@ class AddHomelessFragment : Fragment() {
         binding = FragmentAddHomelessBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = this
+
+        addHomelessViewModel.loggedInUser.value = FirebaseAuth.getInstance().currentUser?.email
 
         val today = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault()).format(
             Calendar.getInstance().time)
@@ -46,7 +49,7 @@ class AddHomelessFragment : Fragment() {
                 addHomelessViewModel.needsShelter.value = true
             }
             val homeless = Homeless(
-                addHomelessViewModel.homelessEmail.value!!, addHomelessViewModel.homelessFirstName.value,
+                addHomelessViewModel.homelessEmail.value!!, addHomelessViewModel.loggedInUser.value, addHomelessViewModel.homelessFirstName.value,
                 addHomelessViewModel.homelessLastName.value, addHomelessViewModel.homelessPhone.value,
                 addHomelessViewModel.shortBio.value, addHomelessViewModel.educationLevel.value,
                 addHomelessViewModel.yearsOfExp.value, addHomelessViewModel.expDescription.value,

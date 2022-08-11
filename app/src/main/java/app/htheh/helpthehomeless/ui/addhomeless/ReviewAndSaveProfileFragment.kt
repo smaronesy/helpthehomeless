@@ -31,13 +31,11 @@ import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.tasks.Continuation
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.UploadTask
 import com.udacity.project4.locationreminders.savereminder.*
 import org.koin.android.ext.android.inject
 import java.io.ByteArrayOutputStream
@@ -53,6 +51,7 @@ class ReviewAndSaveProfileFragment : Fragment() {
     private lateinit var binding: FragmentReviewAndSaveProfileBinding
     private lateinit var homeLess: Homeless
     private lateinit var imageBitmap: Bitmap
+    private lateinit var database: DatabaseReference
     private val myFirebaseStorage: FirebaseStorage = FirebaseStorage.getInstance()
 
     private lateinit var geofencingClient: GeofencingClient
@@ -84,6 +83,9 @@ class ReviewAndSaveProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         homeLess = ReviewAndSaveProfileFragmentArgs.fromBundle(arguments!!).homeless
+
+        // Initializing firebase database
+        database = Firebase.database.reference
 
         // Inflate the layout for this fragment
         binding = FragmentReviewAndSaveProfileBinding.inflate(inflater, container, false)
@@ -158,8 +160,6 @@ class ReviewAndSaveProfileFragment : Fragment() {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        println("Permission code IS: " + PackageManager.PERMISSION_DENIED)
-        println("grantResults: " + grantResults[0])
         if (requestCode == REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE && grantResults.size > 0 ) {
             if (grantResults[LOCATION_PERMISSION_INDEX] == PackageManager.PERMISSION_GRANTED) {
                 checkDeviceLocationSettingsAndStartGeofence()
@@ -202,11 +202,12 @@ class ReviewAndSaveProfileFragment : Fragment() {
 
     @SuppressLint("MissingPermission")
     fun addHomelessToDB() {
+
         // 1) save the reminder to the local db
         val encodedAddress = getEncodedAddress(this.requireActivity().application, homeLess)
 
-        // get walk score and save homeless to database
-        addHomelessViewModel.addHomeless(homeLess, encodedAddress)
+        //adding to firebase realtime db
+        addHomelessViewModel.addHomelessPersonToFirebaseDb(homeLess, encodedAddress)
     }
 
     fun addImageToFirebaseStorage() {

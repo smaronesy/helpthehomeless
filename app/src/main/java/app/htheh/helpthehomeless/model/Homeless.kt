@@ -1,12 +1,14 @@
 package app.htheh.helpthehomeless.model
 
 import android.os.Parcelable
+import com.google.firebase.database.IgnoreExtraProperties
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Parcelize
+@IgnoreExtraProperties
 data class Homeless(
-    var email: String, var firstName: String?, var lastName: String?,
+    var email: String, var loggedInUser: String?, var firstName: String?, var lastName: String?,
     var phone: String?, var shortBio: String?, var educationLevel: String?,
     var yearsOfExp: String?, var expDescription: String?, var needsHome: Boolean?,
     var approximateLocation: String?, var latitude: Double?, var longitude: Double?,

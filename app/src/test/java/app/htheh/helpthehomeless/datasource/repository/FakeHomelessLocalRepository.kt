@@ -1,11 +1,8 @@
 package app.htheh.helpthehomeless.datasource.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import app.htheh.helpthehomeless.database.*
-import app.htheh.helpthehomeless.model.Homeless
 
-class FakeHomelessLocalRepository(var dao: HomelessDao, var homelessList: MutableList<HomelessEntity> = mutableListOf()): HomelessLocalRepository(dao) {
+class FakeHomelessLocalRepository(var dao: HomelessDao, var homelessList: MutableList<HomelessEntity> = mutableListOf()): HomelessRemoteRepository(dao) {
 
     private var shouldReturnError = false
 

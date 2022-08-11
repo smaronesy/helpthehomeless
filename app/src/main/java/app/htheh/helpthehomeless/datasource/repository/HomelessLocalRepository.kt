@@ -23,9 +23,7 @@ import retrofit2.awaitResponse
 import java.text.SimpleDateFormat
 import java.util.*
 
-enum class Filter { SAVED, WEEK, TODAY}
-
-open class HomelessLocalRepository(
+class HomelessLocalRepository(
     private val homelessDao: HomelessDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): HomelessDataSource {
@@ -39,7 +37,7 @@ open class HomelessLocalRepository(
 
     val walkScore = MutableLiveData<Int>()
 
-    val homelesses: LiveData<List<Homeless>> =
+    val homelessIndividuals: LiveData<List<Homeless>> =
         Transformations.switchMap(_filter) {
             // gets the date from last week, seven days ago
             val calender = Calendar.getInstance()
@@ -99,5 +97,4 @@ open class HomelessLocalRepository(
     override suspend fun deleteHomelessByEmail(email: String) {
         TODO("Not yet implemented")
     }
-
 }
