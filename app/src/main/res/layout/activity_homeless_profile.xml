@@ -15,229 +15,194 @@
         android:layout_height="match_parent"
         android:fillViewport="true" >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/profile_constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_margin="@dimen/constraint_layout_margin">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/image_card_out"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="250dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.050000012">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/image_frame"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:orientation="vertical"
+                android:background="@drawable/linearlayout_borders">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/image_card_inner"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:id="@+id/image_card_out"
+                    android:layout_width="155dp"
+                    android:layout_height="155dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="250dp">
 
-                    <ImageView
-                        android:id="@+id/profile_image"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/image_card_inner"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-                        android:scaleType="centerCrop" />
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="250dp">
+
+                        <ImageView
+                            android:id="@+id/profile_image"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:scaleType="centerCrop" />
+
+                    </androidx.cardview.widget.CardView>
 
                 </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/hl_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:text="@{homeless.firstName + ' ' + homeless.lastName}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_large"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/hl_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{homeless.firstName + ' ' + homeless.lastName}"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_large"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_card_out"
-                app:layout_constraintVertical_bias="0.04000002" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <TextView
                 android:id="@+id/title_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="Email"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.15"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hl_name"
-                app:layout_constraintVertical_bias="0.07999998" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/hl_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{homeless.email}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/title_email"
-                app:layout_constraintTop_toBottomOf="@+id/hl_name"
-                app:layout_constraintVertical_bias="0.07999998" />
+                android:text="@{homeless.email}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"/>
 
             <TextView
                 android:id="@+id/title_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Phone"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.15"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_email"
-                app:layout_constraintVertical_bias="0.091" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/hl_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{homeless.phone}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/title_phone"
-                app:layout_constraintTop_toBottomOf="@+id/hl_email"
-                app:layout_constraintVertical_bias="0.110000014" />
+                android:text="@{homeless.phone}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"/>
 
             <TextView
                 android:id="@+id/title_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Status"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.15"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_phone"
-                app:layout_constraintVertical_bias="0.095" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/hl_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/title_status"
-                app:layout_constraintTop_toBottomOf="@+id/hl_phone"
-                app:layout_constraintVertical_bias="0.13999999"
                 app:statusText="@{homeless.needsHome}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"/>
 
             <TextView
                 android:id="@+id/title_walk_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Walk Score"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.15"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_status"
-                app:layout_constraintVertical_bias="0.138" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/hl_walk_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{homeless.walkScore.toString()}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/title_walk_score"
-                app:layout_constraintTop_toBottomOf="@+id/hl_status"
-                app:layout_constraintVertical_bias="0.13999999" />
+                android:text="@{homeless.walkScore.toString()}"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"/>
 
             <ImageView
                 android:id="@+id/walk_score_logo"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.6"
-                app:layout_constraintStart_toEndOf="@+id/hl_walk_score"
-                app:layout_constraintTop_toBottomOf="@+id/hl_status"
-                app:layout_constraintVertical_bias="0.07999998" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/education_level_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Education"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.15"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_walk_score"
-                app:layout_constraintVertical_bias="0.16000003" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/education_level_answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{homeless.educationLevel.toString()}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/education_level_title"
-                app:layout_constraintTop_toBottomOf="@+id/hl_walk_score"
-                app:layout_constraintVertical_bias="0.19999999" />
+                android:text="@{homeless.educationLevel.toString()}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"/>
 
             <TextView
                 android:id="@+id/years_experience_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Experience"
                 android:textSize="@dimen/text_size"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.15"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/education_level_title"
-                app:layout_constraintVertical_bias="0.19999999" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/years_experience_answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{homeless.yearsOfExp.toString()}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/years_experience_title"
-                app:layout_constraintTop_toBottomOf="@+id/education_level_answer"
-                app:layout_constraintVertical_bias="0.24000001" />
+                android:text="@{homeless.yearsOfExp.toString()}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/profile_delete_btn"
                 android:layout_width="@dimen/button_width"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
                 android:backgroundTint="#89BDD5"
-                android:text="DELETE PROFILE"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/years_experience_title"
-                app:layout_constraintVertical_bias="1.0" />
+                android:text="DELETE PROFILE" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </ScrollView>
 
