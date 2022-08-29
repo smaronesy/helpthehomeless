@@ -55,7 +55,7 @@ open class HomelessRemoteRepository: HomelessDataSource {
                 val email = child.child("email").value as String
                 val loggedInUser =  child.child("loggedInUser").value as String?
                 val firstName = child.child("firstName").value as String?
-                val lastName = child.child("firstName").value as String?
+                val lastName = child.child("lastName").value as String?
                 val phone = child.child("phone").value as String?
                 val shortBio = child.child("shortBio").value as String?
                 val educationLevel = child.child("educationLevel").value as String?
