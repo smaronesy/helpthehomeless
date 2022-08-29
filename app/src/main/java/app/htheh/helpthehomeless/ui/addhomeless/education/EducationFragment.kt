@@ -54,7 +54,9 @@ class EducationFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         binding.nextToExperience.setOnClickListener {
             if(selected){
+                addHomelessViewModel.educationDetails.value = binding.edEt.text.toString()
                 homeLess.educationLevel = addHomelessViewModel.educationLevel.value
+                homeLess.educationDetails = addHomelessViewModel.educationDetails.value
                 this.findNavController().navigate(EducationFragmentDirections.actionToExperience(homeLess))
             } else {
                 Toast.makeText(this.requireContext(), "Please select an education level", Toast.LENGTH_SHORT).show()
@@ -67,7 +69,6 @@ class EducationFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
         // An item was selected. You can retrieve the selected item using
-        println("PPPP" + parent.getItemAtPosition(pos))
         addHomelessViewModel.educationLevel.value = parent.getItemAtPosition(pos) as String?
         selected = true
     }

@@ -49,9 +49,10 @@ class AddHomelessFragment : Fragment() {
                 addHomelessViewModel.needsShelter.value = true
             }
             val homeless = Homeless(
-                addHomelessViewModel.homelessEmail.value!!, addHomelessViewModel.loggedInUser.value, addHomelessViewModel.homelessFirstName.value,
-                addHomelessViewModel.homelessLastName.value, addHomelessViewModel.homelessPhone.value,
-                addHomelessViewModel.shortBio.value, addHomelessViewModel.educationLevel.value,
+                addHomelessViewModel.homelessEmail.value!!, addHomelessViewModel.loggedInUser.value,
+                addHomelessViewModel.homelessFirstName.value, addHomelessViewModel.homelessLastName.value,
+                addHomelessViewModel.homelessPhone.value, addHomelessViewModel.shortBio.value,
+                addHomelessViewModel.educationLevel.value, addHomelessViewModel.educationDetails.value,
                 addHomelessViewModel.yearsOfExp.value, addHomelessViewModel.expDescription.value,
                 addHomelessViewModel.needsShelter.value, addHomelessViewModel.approximateLocation.value,
                 addHomelessViewModel.latitude.value, addHomelessViewModel.longitude.value,

@@ -59,6 +59,7 @@ open class HomelessRemoteRepository: HomelessDataSource {
                 val phone = child.child("phone").value as String?
                 val shortBio = child.child("shortBio").value as String?
                 val educationLevel = child.child("educationLevel").value as String?
+                val educationDetails = child.child("educationDetails").value as String?
                 val yearsOfExp = child.child("yearsOfExp").value as String?
                 val expDescription = child.child("expDescription").value as String?
                 val needsHome = child.child("needsHome").value as Boolean?
@@ -75,7 +76,7 @@ open class HomelessRemoteRepository: HomelessDataSource {
 
                 val homelessIndividual = Homeless(
                     email, loggedInUser, firstName, lastName, phone, shortBio,
-                    educationLevel, yearsOfExp, expDescription,
+                    educationLevel, educationDetails, yearsOfExp, expDescription,
                     needsHome, approximateLocation, latitude,
                     longitude, walkScore?.toInt(), wsLogoUrl, firebaseImageUri,
                     imageUri, imagePath, dateAdded, id

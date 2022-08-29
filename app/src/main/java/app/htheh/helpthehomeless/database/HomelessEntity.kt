@@ -32,6 +32,9 @@ data class HomelessEntity(
     @ColumnInfo(name="education_level")
     var educationLevel: String?,
 
+    @ColumnInfo(name="education_details")
+    var educationDetails: String?,
+
     @ColumnInfo(name="years_of_exp")
     var yearsOfExp: String?,
 
@@ -82,6 +85,7 @@ fun HomelessEntity.toHomeless(): Homeless {
         phone = phone,
         shortBio = shortBio,
         educationLevel = educationLevel,
+        educationDetails = educationDetails,
         yearsOfExp = yearsOfExp,
         expDescription = expDescription,
         needsHome = needsHome,
@@ -106,6 +110,7 @@ fun Homeless.toHomelessEntity(): HomelessEntity {
         phone = phone,
         shortBio = shortBio,
         educationLevel = educationLevel,
+        educationDetails = educationDetails,
         yearsOfExp = yearsOfExp,
         expDescription = expDescription,
         needsHome = needsHome,
@@ -131,6 +136,7 @@ fun List<HomelessEntity>.asDomainModel(): List<Homeless> {
             phone = it.phone,
             shortBio = it.shortBio,
             educationLevel = it.educationLevel,
+            educationDetails = it.educationDetails,
             yearsOfExp = it.yearsOfExp,
             expDescription = it.expDescription,
             needsHome = it.needsHome,
@@ -157,6 +163,7 @@ fun List<Homeless>.asDatabaseObject(): Array<HomelessEntity> {
             phone = it.phone,
             shortBio = it.shortBio,
             educationLevel = it.educationLevel,
+            educationDetails = it.educationDetails,
             yearsOfExp = it.yearsOfExp,
             expDescription = it.expDescription,
             needsHome = it.needsHome,

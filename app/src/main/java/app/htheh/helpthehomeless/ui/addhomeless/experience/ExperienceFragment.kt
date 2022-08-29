@@ -49,10 +49,9 @@ class ExperienceFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         spinner.onItemSelectedListener = this
 
-        addHomelessViewModel.expDescription.value = binding.expEt.text.toString()
-
         binding.nextToSelectLocation.setOnClickListener {
             if(selected){
+                addHomelessViewModel.expDescription.value = binding.expEt.text.toString()
                 homeLess.yearsOfExp = addHomelessViewModel.yearsOfExp.value
                 homeLess.expDescription = addHomelessViewModel.expDescription.value
                 this.findNavController().navigate(ExperienceFragmentDirections.actionSelectLocation(homeLess))

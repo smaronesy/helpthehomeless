@@ -9,7 +9,7 @@ import java.util.*
 @IgnoreExtraProperties
 data class Homeless(
     var email: String, var loggedInUser: String?, var firstName: String?, var lastName: String?,
-    var phone: String?, var shortBio: String?, var educationLevel: String?,
+    var phone: String?, var shortBio: String?, var educationLevel: String?, var educationDetails: String?,
     var yearsOfExp: String?, var expDescription: String?, var needsHome: Boolean?,
     var approximateLocation: String?, var latitude: Double?, var longitude: Double?,
     var walkScore: Int?, var wsLogoUrl: String?, var firebaseImageUri: String?,  var imageUri: String?,

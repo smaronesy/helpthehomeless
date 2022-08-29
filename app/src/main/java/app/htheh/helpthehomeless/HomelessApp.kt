@@ -39,6 +39,9 @@ class HomelessApp : Application() {
                     get(),
                     get()
                 )
+            }
+
+            single {
                 HomelessProfileViewModel(
                     get(),
                     get()

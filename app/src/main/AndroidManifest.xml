@@ -30,6 +30,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HelpTheHomeless"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.homelesspersonprofile.expdetails.ExpDetailsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_epx_details"
+            android:theme="@style/Theme.HelpTheHomeless.NoActionBar" />
+        <activity
+            android:name=".ui.homelesspersonprofile.eddetails.EdDetailsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_ed_details"
+            android:theme="@style/Theme.HelpTheHomeless.NoActionBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -56,12 +66,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.homelesspersonprofile.HomelessProfileActivity"
             android:label="Homeless Profile"
-            android:theme="@style/Theme.HelpTheHomeless.NoActionBar"/>
-
+            android:theme="@style/Theme.HelpTheHomeless.NoActionBar" />
         <activity
             android:name=".ui.HomelessActivity"
             android:exported="true"
@@ -72,11 +80,11 @@
             android:name=".geofence.GeofenceBroadcastReceiver"
             android:enabled="true"
             android:exported="true" />
+
         <service
             android:name=".geofence.GeofenceTransitionsJobIntentService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
     </application>
 
 </manifest>

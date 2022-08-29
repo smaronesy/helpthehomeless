@@ -26,7 +26,7 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(Constants.BASE_URL)
     .build()
 
-interface CrimeApiServiice {
+interface CrimeApiService {
     @GET ( "score?")
     fun getProperties(
         @Query("wsapikey") key: String,
@@ -40,7 +40,7 @@ interface CrimeApiServiice {
 }
 
 object WalkScoreApi {
-    val retrofitService: CrimeApiServiice by lazy {
-        retrofit.create(CrimeApiServiice::class.java)
+    val retrofitService: CrimeApiService by lazy {
+        retrofit.create(CrimeApiService::class.java)
     }
 }

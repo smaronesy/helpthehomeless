@@ -76,12 +76,9 @@ class GeofenceTransitionsJobIntentService : JobIntentService(), CoroutineScope {
 //        Interaction to the repository has to be through a coroutine scope
         CoroutineScope(coroutineContext).launch(SupervisorJob()) {
             //get the homeless with the request id (email)
-            println("Result BEING PRITNED: " + requestId)
             val result = homelessRemoteRepository.getHomelessByEmail(requestId)
-            println("EMAIL BEING PRITNED: " + result)
             if (result is Success<HomelessEntity>) {
                 val homelessEntity = result.data
-                println("FROM sendNotifications: " + homelessEntity.email)
                 //send a notification to the user with the homeless details
                 sendNotification(
                     this@GeofenceTransitionsJobIntentService, Homeless(
@@ -92,6 +89,7 @@ class GeofenceTransitionsJobIntentService : JobIntentService(), CoroutineScope {
                         homelessEntity.phone,
                         homelessEntity.shortBio,
                         homelessEntity.educationLevel,
+                        homelessEntity.educationDetails,
                         homelessEntity.yearsOfExp,
                         homelessEntity.expDescription,
                         homelessEntity.needsHome,
